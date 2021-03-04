@@ -56,7 +56,7 @@ class OpeningDay extends DataObject
     ];
  	private static $singular_name="Ladentag";
 	private static $plural_name="Ladentage";
-	private static $table_name="Shopday";
+	private static $table_name="OpeningDay";
 	public function DayTranslated(){
 		return _t("Day.".$this->Day,$this->Day);
 	}
