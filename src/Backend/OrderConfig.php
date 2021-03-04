@@ -35,7 +35,9 @@ class OrderConfig extends DataObject
 		"Logo"=>Image::class,
 		"DirectDebitAuthForm"=>File::class
 	);
-
+	private static $has_many=[
+		"OpeningDays"=>OpeningDay::class
+	];
 
 	private static $singular_name="Shop Konfiguration";
 	private static $plural_name="Shop Konfiguration";
