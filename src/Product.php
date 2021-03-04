@@ -41,7 +41,8 @@ class Product extends Page
 		'GlobalProductSort'=>'Int',
 		'Quantity'=>'Int',
 		'ShowBasePrice'=>'Boolean(1)',
-		'OutOfStock'=>'Boolean'
+		'OutOfStock'=>'Boolean',
+		'ShowQualityLabel'=>'Boolean(1)'
 	);
 
 	private static $has_many = [
@@ -127,6 +128,7 @@ class Product extends Page
 		$amount->setScale(2);
 		
 		$infiniteInventory=new CheckboxField("InfiniteInventory","Das Produkt hat einen unendlichen Bestand.");
+		$showQualitiyLabel=new CheckboxField("ShowQualityLabel",utf8_encode("Qualitäts-Label anzeigen"));
 		$outOfStock=new CheckboxField("OutOfStock","Das Produkt als ausverkauft anzeigen.");
 		$inventory=new NumericField("Inventory","Vorhandene Anzahl");
 		$inventory->setLocale("DE_De");
@@ -145,6 +147,7 @@ class Product extends Page
 		$fields->addFieldToTab("Root.Main",new ListboxField("Ingredients", "Zutaten",Ingredient::get()->map("ID", "Title", "Bitte auswählen")),"Content");
 		//$fields->addFieldToTab("Root.Shop", $vac,"Content");
 		$fields->addFieldToTab("Root.Main", new TextField('GlobalProductSort'),"Content");
+		$fields->addFieldToTab("Root.Main", $showQualitiyLabel,"HeaderImage");
 		$fields->addFieldToTab("Root.Shop", $caprice,"Content");
 		$fields->addFieldToTab("Root.Shop",$unit,"Content");
 		$fields->addFieldToTab("Root.Shop", $price,"Content");

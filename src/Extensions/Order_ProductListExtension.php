@@ -60,7 +60,7 @@ class Order_ProductListExtension extends DataExtension{
 	
 	// Extension for Product::getCMSFields
 	public function addExtension(FieldList $fields){
-		//if($this->owner->ID==OrderConfig::get()->First()->ProductRoot()->ID){
+		if($this->owner->ID==OrderConfig::get()->First()->ProductRootID){
 			$fields->addFieldToTab('Root.Produkte',new CheckboxField('InPreSale','Vorverkauf'));
 			$fields->addFieldToTab('Root.Produkte',new CheckboxField('ResetPreSale','Vorverkauf beenden'));
 			$fields->addFieldToTab('Root.Produkte',new DateField('PreSaleStart','Start des Vorverkauf'));
@@ -88,6 +88,8 @@ class Order_ProductListExtension extends DataExtension{
 				
 			;
 
+			//$fields->addFieldToTab('Root.Produkte',LiteralField::create("test","".);
+		
 			$attributesMap=Attribute::get()->map("ID", "Title", "Bitte auswählen");
 			$editableColumns->setDisplayFields(array(
 
@@ -107,7 +109,7 @@ class Order_ProductListExtension extends DataExtension{
 							return NumericField::create($column)->setScale(0);
 					})
 			));
-			$fields->addFieldToTab("Root.Produkte",CheckboxField::create("ShowProducts","Produktliste anzeigen"));
+			//$fields->addFieldToTab("Root.Produkte",CheckboxField::create("ShowProducts","Produktliste anzeigen"));
 			//Injector::inst()->get(LoggerInterface::class)->error('gefilterte Produkte anzeigen '.$this->owner->Attributes()->Count());
 			if($this->owner->Attributes()->Count()>0){
 				//Injector::inst()->get(LoggerInterface::class)->error('gefilterte Produkte anzeigen');
@@ -123,7 +125,10 @@ class Order_ProductListExtension extends DataExtension{
 			}
 			$products=GridField::create('Preise','Produktvarianten',$data,$gridFieldConfig);
 			
-			//$fields->addFieldToTab('Root.Produkte',$products);
+			
+			
+				$fields->addFieldToTab('Root.Produkte',$products);
+			
 			
 			
 			
@@ -148,19 +153,20 @@ class Order_ProductListExtension extends DataExtension{
 
 				]);
 			}
-		//}
+		}
 	}
 	public function onBeforeWrite(){
 		if($this->owner->getField("ResetPreSale")==true){
 			$this->owner->setField("InPreSale",false);
 			$this->owner->setField("PreSaleStart",null);
 			$this->owner->setField("PreSaleEnd",null);
+			Injector::inst()->get(LoggerInterface::class)->error('productlist preale auf null setzten=');
 		}
 		parent::onBeforeWrite();
 	}
 	public function onAfterWrite(){
-		/*
-		if($this->owner->ID==OrderConfig::get()->First()->ProductRoot()->ID){
+		
+		if($this->owner->ID==OrderConfig::get()->First()->ProductRootID){
 		//Ausgewählte Produktvarianten holen
 		
 		if($this->owner->Attributes()->Count()>0){
@@ -182,6 +188,7 @@ class Order_ProductListExtension extends DataExtension{
 				$product->PreSaleStart=$this->owner->PreSaleStart;
 				$product->PreSaleEnd=$this->owner->PreSaleEnd;
 				if($product->Inventory==0){
+					//Voreingestellten Bestand übernehmen
 					//$product->Inventory=$product->PreSaleInventory;
 				}
 				$this->owner->extend('HOOK_Order_ProductListExtension_AfterWrite_Product', $product);
@@ -203,7 +210,7 @@ class Order_ProductListExtension extends DataExtension{
 		$update->addAssignments(['InPreSale'=> false,'ResetPreSale'=> false]);
 		$update->execute();
 		
-	}*/
+	}
 	
 	}
 }
