@@ -1,5 +1,8 @@
 <?php
 
+// Öffnungszeiten in OrderConfig
+//Möglicherweise Basisklasse für Delivery/DeliveryDay und Delivery/CollectionDay
+
 namespace Schrattenholz\Order;
 
 use SilverStripe\ORM\DataObject;
