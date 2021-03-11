@@ -1,4 +1,4 @@
-/*muh vendor\schrattenholz\order\javascript\order.js*/
+/*vendor\schrattenholz\order\javascript\order.js*/
 
 jQuery( document ).ready(function() {
 
