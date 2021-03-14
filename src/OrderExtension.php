@@ -15,6 +15,7 @@ use SilverStripe\ORM\ValidationException;
 use Psr\Log\LoggerInterface;
 use SilverStripe\View\Requirements;
 use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Security\Security;
 class OrderExtension extends DataExtension {
 	private static $allowed_actions = array (
 		'ClearBasket',
@@ -75,7 +76,8 @@ class OrderExtension extends DataExtension {
 		return OrderConfig::get()->First();
 	}
 	function logoutUser(HTTPRequest $request){
-		Injector::inst()->get(IdentityStore::class)->logOut($request);
+		$this->owner->ClearBasket();
+		Injector::inst()->get(IdentityStore::class)->logOut();
 		$this->owner->redirect($this->owner->Link());
 	}
 	public function getAllProducts(){
@@ -95,8 +97,8 @@ class OrderExtension extends DataExtension {
 		        /*$member = Member::currentUser();
 				if($member) $member->logOut();*/
 				$this->getSession()->clear('session_start_time');
-				$this->ClearBasket();
-				$this->ClearAddress();
+				$this->owner->ClearBasket();
+				$this->owner->ClearAddress();
 				//Director::redirect(Director::baseURL() . 'Security/login');
 		    }
 		}
@@ -254,7 +256,9 @@ class OrderExtension extends DataExtension {
 	}
 	// clear basket
 	public function ClearBasket(){
-		Injector::inst()->get(LoggerInterface::class)->error('ClearBasket------------------>');
+		//Injector::inst()->get(LoggerInterface::class)->error('ClearBasket------------------>');
+		$vars=new ArrayData(array("Basket"=>$basket,"Order"=>$order));
+		$this->owner->extend('OrderExtension_ClearBasket', $vars);
 		$this->clearSession('warenkorb');
 	}
 	// clear address-data
