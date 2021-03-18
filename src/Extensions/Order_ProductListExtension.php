@@ -199,7 +199,7 @@ class Order_ProductListExtension extends DataExtension{
 				$product->InPreSale=false;
 				$product->PreSaleStart=null;
 				$product->PreSaleEnd=null;
-				$product->Inventory=0;
+				//$product->Inventory=0;
 				$this->owner->extend('HOOK_Order_ProductListExtension_AfterWrite_Product', $product);
 				$product->write(); // saves the record
 			}
