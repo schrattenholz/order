@@ -52,11 +52,13 @@ class OrderAdmin extends ModelAdmin
 			
 			if($gridField) {
 				$config = $gridField->getConfig();
-				$config->addComponent(new GridFieldPaginator(10));
+				//$config->addComponent(new GridFieldPaginator(10));
 				$config->removeComponentsByType('SilverStripe\Forms\GridField\GridFieldExportButton');
 				$config->removeComponentsByType('SilverStripe\Forms\GridField\GridFieldImportButton');
 				$config->removeComponentsByType('SilverStripe\Forms\GridField\GridFieldPrintButton');
 				$config->addComponent(new GridField_ExportOrderButton('buttons-before-left'));
+				$paginator = $config->getComponentByType(GridFieldPaginator::class);
+				$paginator->setItemsPerPage(10);
 			}
 			return $form;
     }
