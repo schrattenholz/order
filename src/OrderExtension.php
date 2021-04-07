@@ -27,7 +27,7 @@ class OrderExtension extends DataExtension {
 		'getSingleProduct',
 		'getLinkCheckoutAddress',
 		'setCheckoutAddress',
-		'getCheckoutAdress',
+		'getCheckoutAddress',
 		'makeOrder',
 		'getLocations',
 		'checkIfProductInBasket',
@@ -122,7 +122,7 @@ class OrderExtension extends DataExtension {
 		$this->getSession()->set('personendaten', implode('+++',$ar));
 		return $this->getSession()->get('personendaten');
 	}
-	public function getCheckoutAdress(){
+	public function getCheckoutAddress(){
 		$personenDaten=$this->getSession()->get('personendaten');
 		if($personenDaten){
 		$tmpAr=explode('+++',$personenDaten);		
@@ -148,8 +148,8 @@ class OrderExtension extends DataExtension {
 	}
 	public function getLinkCheckoutAddress(){
 		$orderConfig=OrderConfig::get()->First();
-		$checkoutAdress=SiteTree::get()->where('ID='.$orderConfig->CheckoutAddressID)->First();
-		return $checkoutAdress->Link();	
+		$CheckoutAddress=SiteTree::get()->where('ID='.$orderConfig->CheckoutAddressID)->First();
+		return $CheckoutAddress->Link();	
 	}
 	public function getLinkBasket(){
 		$orderConfig=OrderConfig::get()->First();
@@ -361,11 +361,11 @@ class OrderExtension extends DataExtension {
 		->setData([
 				'BaseHref' => $_SERVER['DOCUMENT_ROOT'],
 				'Basket' => $this->getBasket(),
-				'CheckoutAdress' => $this->getCheckoutAdress(),
+				'CheckoutAddress' => $this->getCheckoutAddress(),
 				'OrderConfig'=>OrderConfig::get()->First()
 		])
 		->setFrom(OrderConfig::get()->First()->ResponseEmail)
-		->setTo($this->getCheckoutAdress()->Email)
+		->setTo($this->getCheckoutAddress()->Email)
 		->setSubject(utf8_encode("Bestellbestätigung Hof Lehnmühle"));
 		$email->send();
 			//$email = new Email("webseite@amp-bayern.com", "stein@amp-bayern.com", "Neue Tonnenreinigung-Bestellung", "");
@@ -376,7 +376,7 @@ class OrderExtension extends DataExtension {
 			$email->populateTemplate(array(
 				'BaseHref' => $_SERVER['DOCUMENT_ROOT'],
 				'Basket' => $this->getBasket(),
-				'CheckoutAdress' => $this->getCheckoutAdress(),
+				'CheckoutAddress' => $this->getCheckoutAddress(),
 			));
 			*/
 			
@@ -385,7 +385,7 @@ class OrderExtension extends DataExtension {
 		->setData([
 			'BaseHref' => $_SERVER['DOCUMENT_ROOT'],
 			'Basket' => $this->getBasket(),
-			'CheckoutAdress' => $this->getCheckoutAdress(),
+			'CheckoutAddress' => $this->getCheckoutAddress(),
 			'OrderConfig'=>OrderConfig::get()->First()
 		])
 		->setFrom(OrderConfig::get()->First()->OrderEmail)
