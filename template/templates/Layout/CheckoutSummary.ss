@@ -34,7 +34,7 @@
 <div class="row fluid">
 			<div class="col-12 fluid">
 				<h3>Anmerkungen zur Bestellung:</h3>
-				$CheckoutAdress.Anmerkungen
+				$CheckoutAddress.Anmerkungen
 			</div>
 		</div>
 		<form id="checkoutSummary" class="row fluid">
@@ -43,43 +43,43 @@
 				<div class="clearfix"></div>
 				 <div class="form-group">
 					<label>Firmenname</label>
-					<input type="text" class="form-control" name="Firmenname" value="$CheckoutAdress.Firmenname" disabled/>					
+					<input type="text" class="form-control" name="Firmenname" value="$CheckoutAddress.Firmenname" disabled/>					
 				</div>
 				 <div class="form-group">
 					<label>Strasse/Nr*</label>
-					<input  type="text" class="form-control" id="Strasse" name="Strasse" value="$CheckoutAdress.Strasse" disabled/>
+					<input  type="text" class="form-control" id="Strasse" name="Strasse" value="$CheckoutAddress.Strasse" disabled/>
 				</div>
 				 <div class="form-group">
 					<label>PLZ*</label>
-					<input type="text" class="form-control" id="PLZ"  name="PLZ" value="$CheckoutAdress.PLZ" disabled />
+					<input type="text" class="form-control" id="PLZ"  name="PLZ" value="$CheckoutAddress.PLZ" disabled />
 				</div>
 				 <div class="form-group">
 					<label>Ort*</label>
-					<input type="text" class="form-control" id="Ort" name="Ort" value="$CheckoutAdress.Ort"  disabled />
+					<input type="text" class="form-control" id="Ort" name="Ort" value="$CheckoutAddress.Ort"  disabled />
 				</div>
 			</div>
 			<div class="col-md-6 pr-0">
 				<h3 class="clearfix">Ansprechpartner:</h3>
 				 <div class="form-group row">
-				<label class="custom-control-label col-6" for="01"><input type="radio" id="01" class="form-check-input" name="Anrede" value="Frau" disabled <% if $CheckoutAdress.Anrede=="Frau" %>checked<% end_if %>> Frau</label>
+				<label class="custom-control-label col-6" for="01"><input type="radio" id="01" class="form-check-input" name="Anrede" value="Frau" disabled <% if $CheckoutAddress.Anrede=="Frau" %>checked<% end_if %>> Frau</label>
 				
-				<label class="custom-control-label col-6" for="02"><input type="radio" id="02" class="form-check-input" name="Anrede" value="Herr" disabled <% if $CheckoutAdress.Anrede=="Herr" %>checked<% end_if %>> Herr</label>
+				<label class="custom-control-label col-6" for="02"><input type="radio" id="02" class="form-check-input" name="Anrede" value="Herr" disabled <% if $CheckoutAddress.Anrede=="Herr" %>checked<% end_if %>> Herr</label>
 				</div>
 				 <div class="form-group">
 					<label>Nachname*</label>
-					<input class="feld form-control"  type="text" id="Nachname" name="Nachname" value="$CheckoutAdress.Nachname"  disabled/>
+					<input class="feld form-control"  type="text" id="Nachname" name="Nachname" value="$CheckoutAddress.Nachname"  disabled/>
 				</div>
 				 <div class="form-group">
 					<label>Vorname*</label>
-					<input class="feld last form-control" type="text" id="Vorname" name="Vorname" value="$CheckoutAdress.Vorname"  disabled/>
+					<input class="feld last form-control" type="text" id="Vorname" name="Vorname" value="$CheckoutAddress.Vorname"  disabled/>
 				</div>
 				 <div class="form-group">
 					<label>Telefon*</label>
-					<input class="feld form-control"  type="text" id="Telefon" name="Telefon" value="$CheckoutAdress.Telefon"  disabled/>
+					<input class="feld form-control"  type="text" id="Telefon" name="Telefon" value="$CheckoutAddress.Telefon"  disabled/>
 				</div>
 				 <div class="form-group">
 					<label>Email*</label>
-					<input class="feld last form-control" type="text" id="Email" name="Email" value="$CheckoutAdress.Email"  disabled/>
+					<input class="feld last form-control" type="text" id="Email" name="Email" value="$CheckoutAddress.Email"  disabled/>
 				</div>
 			</div>
 			<div class="col-md-12 fluid">

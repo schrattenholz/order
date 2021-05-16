@@ -33,7 +33,7 @@ table {
   background-color: #f5f5f5;
 }
 </style>
-<h3>Guten Tag $CheckoutAdress.Anrede $CheckoutAdress.Vorname $CheckoutAdress.Nachname</h3>
+<h3>Guten Tag $CheckoutAddress.Anrede $CheckoutAddress.Vorname $CheckoutAddress.Nachname</h3>
 <p>
 dies ist die Bestellbestätigung für Ihre Bestellung bei hof-lehnmuehle.de.
 </p>
@@ -69,7 +69,7 @@ dies ist die Bestellbestätigung für Ihre Bestellung bei hof-lehnmuehle.de.
 		 </tbody>	 
         </table>
 		<h3>Anmerkungen zur Bestellung</h3>
-		$CheckoutAdress.Anmerkungen
+		$CheckoutAddress.Anmerkungen
 <h3>Ihre Daten</h3>
 		
 		 <div class="span4" style="margin-left:0;">
@@ -82,10 +82,10 @@ dies ist die Bestellbestätigung für Ihre Bestellung bei hof-lehnmuehle.de.
 				</tr>
 			  </thead>
 				<tbody>
-					<tr><td class="noBorder">Firmenname:</td><td>$CheckoutAdress.Firmenname</td></tr>
-					<tr><td class="noBorder">Strasse:</td><td class="noBorder">$CheckoutAdress.Strasse</td></tr>
-					<tr><td class="noBorder">PLZ:</td><td class="noBorder">$CheckoutAdress.PLZ</td></tr>
-					<tr><td class="noBorder">Ort:</td><td class="noBorder">$CheckoutAdress.Ort</td></tr>
+					<tr><td class="noBorder">Firmenname:</td><td>$CheckoutAddress.Firmenname</td></tr>
+					<tr><td class="noBorder">Strasse:</td><td class="noBorder">$CheckoutAddress.Strasse</td></tr>
+					<tr><td class="noBorder">PLZ:</td><td class="noBorder">$CheckoutAddress.PLZ</td></tr>
+					<tr><td class="noBorder">Ort:</td><td class="noBorder">$CheckoutAddress.Ort</td></tr>
 				</tbody>
 			</table>
           </div>
@@ -99,10 +99,10 @@ dies ist die Bestellbestätigung für Ihre Bestellung bei hof-lehnmuehle.de.
 				</tr>
 			  </thead>
 				<tbody>
-					<tr><td width="20%">Vorname:</td><td width="80%">$CheckoutAdress.Vorname</td></tr>
-					<tr><td class="noBorder">Nachname:</td><td class="noBorder">$CheckoutAdress.Nachname</td></tr>
-					<tr><td class="noBorder">Telefon:</td><td class="noBorder">$CheckoutAdress.Telefon</td></tr>
-					<tr><td class="noBorder">Email:</td><td class="noBorder">$CheckoutAdress.Email</td></tr>
+					<tr><td width="20%">Vorname:</td><td width="80%">$CheckoutAddress.Vorname</td></tr>
+					<tr><td class="noBorder">Nachname:</td><td class="noBorder">$CheckoutAddress.Nachname</td></tr>
+					<tr><td class="noBorder">Telefon:</td><td class="noBorder">$CheckoutAddress.Telefon</td></tr>
+					<tr><td class="noBorder">Email:</td><td class="noBorder">$CheckoutAddress.Email</td></tr>
 				</tbody>
 			</table>
 
