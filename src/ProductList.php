@@ -8,6 +8,7 @@ use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Assets\Image;
 use SilverStripe\AssetAdmin\Forms\UploadField;
+use Schrattenholz\Blog\BlogList;
 class ProductList extends Page{
 	private static $db=
 	[
