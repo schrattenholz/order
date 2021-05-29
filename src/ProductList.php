@@ -32,7 +32,8 @@ class ProductList extends Page{
     private static $allowed_children = [
         Product::class,
         ProductList::class,
-		CollectedProduct::class
+		CollectedProduct::class,
+		BlogList::class
     ];
 	private static $owns = [
 		'TeaserImage'
