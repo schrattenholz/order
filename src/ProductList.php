@@ -39,13 +39,4 @@ class ProductList extends Page{
 	private static $owns = [
 		'TeaserImage'
 	];
-	public function CoverImage(){
-		if($this->TeaserImageID){
-			return $this->TeaserImage();
-		}else if($this->owner->MainImageID){
-			return $this->owner->MainImageID;
-		}else{
-			return OrderConfig::get()->First()->ProductImage();
-		}
-	}
 }

@@ -181,11 +181,4 @@ class Product extends Page
 			return "ja";
 		}
 	}
-	public function CoverImage(){
-		if($this->ProductImages()->Count()>0){
-			return $this->ProductImages()->First();
-		}else{
-			return OrderConfig::get()->First()->ProductImage();
-		}
-	}
 }
