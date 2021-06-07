@@ -174,6 +174,13 @@ class Product extends Page
 		$this->extend('addExtension', $fields);
 		return $fields;
 	}	
+		public function CoverImage(){
+		if($this->ProductImages()->Count()>0){
+			return $this->ProductImages()->First();
+		}else{
+			return OrderConfig::get()->First()->ProductImage();
+		}
+	}
 	public function VacReadable($data){
 		if($data=='off'){
 			return "nein";
