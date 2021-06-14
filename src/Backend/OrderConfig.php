@@ -17,7 +17,8 @@ class OrderConfig extends DataObject
 		'ConfirmationMailAfterContent'=>'HTMLText',
 		'EmailSignature'=>'HTMLText',
 		'VacuumPrice'=>'Decimal(6,2)',
-		'ProductFooter'=>'HTMLText'
+		'ProductFooter'=>'HTMLText',
+		'OpeningDaysText'=>'HTMLText'
 	);
 	private static $table_name="shopconfig";
 	private static $has_one=array(
