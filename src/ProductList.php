@@ -34,7 +34,8 @@ class ProductList extends Page{
         Product::class,
         ProductList::class,
 		CollectedProduct::class,
-		BlogList::class
+		BlogList::class,
+		Page::class
     ];
 	private static $owns = [
 		'TeaserImage'
