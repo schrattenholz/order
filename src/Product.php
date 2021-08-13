@@ -24,6 +24,9 @@ use SilverStripe\Forms\LiteralField;
 use Bummzack\SortableFile\Forms\SortableUploadField;
 
 use SilverStripe\ORM\Queries\SQLUpdate;
+use SilverStripe\Core\Injector\Injector;
+use SilverStripe\ORM\ValidationException;
+use Psr\Log\LoggerInterface;
 class Product extends Page
 {
 	private static $table_name="Product";
@@ -174,12 +177,25 @@ class Product extends Page
 		$this->extend('addExtension', $fields);
 		return $fields;
 	}	
-		public function CoverImage(){
+		/*public function DefaultImage(){
+			Injector::inst()->get(LoggerInterface::class)->info('Product::DefaultImage');
 		if($this->ProductImages()->Count()>0){
 			return $this->ProductImages()->First();
 		}else{
 			return OrderConfig::get()->First()->ProductImage();
 		}
+	}*/
+	public function BasicExtension_DefaultImage($defaultImage){
+		Injector::inst()->get(LoggerInterface::class)->info('Product::BasicExtension_DefaultImage');
+		if (!$defaultImage){
+			//Injector::inst()->get(LoggerInterface::class)->error('BlogExtension.php BasicExtension_DefaultImage Dummy=');
+			$defaultImage->DefaultImage= $this->Childern()->First()->DefaultImage();
+		}else if($this->ProductImages()->Count()>0){
+			return $this->ProductImages()->First();
+		}else{
+			return OrderConfig::get()->First()->ProductImage();
+		}
+		return $defaultImage;
 	}
 	public function VacReadable($data){
 		if($data=='off'){

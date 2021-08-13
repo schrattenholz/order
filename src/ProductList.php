@@ -40,4 +40,9 @@ class ProductList extends Page{
 	private static $owns = [
 		'TeaserImage'
 	];
+	/*public function DefaultImage(){
+		return $this->Children()->First()->DefaultImage();
+	}*/
+
+
 }
