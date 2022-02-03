@@ -168,7 +168,7 @@ class Order_ProductListExtension extends DataExtension{
 		
 		if($this->owner->ID==OrderConfig::get()->First()->ProductRootID){
 		//Ausgewählte Produktvarianten holen
-		
+		//Injector::inst()->get(LoggerInterface::class)->error('onAfterWrite ProductList id');
 		if($this->owner->Attributes()->Count()>0){
 			$attributes=[];
 			foreach($this->owner->Attributes() as $attr){
