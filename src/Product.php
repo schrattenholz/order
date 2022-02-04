@@ -160,8 +160,8 @@ class Product extends Page
 		$fields->addFieldToTab("Root.Shop", $infiniteInventory,"Content");
 		$fields->addFieldToTab("Root.Shop", $inventory,"Content");
 		
-		$fields->addFieldToTab("Root.Staffelpreise",new CheckboxField("ShowPricingTable","Staffeltabelle anzeigen"),"Content");
-		$fields->addFieldToTab('Root.Staffelpreise', GridField::create(
+		$fields->addFieldToTab("Root.Produktvarianten",new CheckboxField("ShowPricingTable","Staffeltabelle anzeigen"),"Content");
+		$fields->addFieldToTab('Root.Produktvarianten', GridField::create(
             'Preise',
             'Staffelelemente',
             $this->Preise()->sort('SortOrder'),
