@@ -163,7 +163,7 @@ class Product extends Page
 		$fields->addFieldToTab("Root.Produktvarianten",new CheckboxField("ShowPricingTable","Staffeltabelle anzeigen"),"Content");
 		$fields->addFieldToTab('Root.Produktvarianten', GridField::create(
             'Preise',
-            'Staffelelemente',
+            'Produktvarianten',
             $this->Preise()->sort('SortOrder'),
             $gridfield=GridFieldConfig_RecordEditor::create()
         ),"Content");
