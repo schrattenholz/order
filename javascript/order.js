@@ -19,7 +19,7 @@ jQuery( document ).ready(function() {
 
 		var pageLink="$Link";
 		jQuery('#signin-tab').submit(function (event) {
-			console.log("signin-tab");
+			//console.log("signin-tab");
 				event.preventDefault();
 			if (jQuery('#signin-tab')[0].checkValidity() === false) {
 				event.stopPropagation();

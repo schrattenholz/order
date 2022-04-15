@@ -160,7 +160,7 @@ class Order_ProductListExtension extends DataExtension{
 			$this->owner->setField("InPreSale",false);
 			$this->owner->setField("PreSaleStart",null);
 			$this->owner->setField("PreSaleEnd",null);
-			Injector::inst()->get(LoggerInterface::class)->error('productlist preale auf null setzten=');
+			//Injector::inst()->get(LoggerInterface::class)->error('productlist preale auf null setzten=');
 		}
 		parent::onBeforeWrite();
 	}
@@ -187,10 +187,10 @@ class Order_ProductListExtension extends DataExtension{
 				$product->InPreSale=true;
 				$product->PreSaleStart=$this->owner->PreSaleStart;
 				$product->PreSaleEnd=$this->owner->PreSaleEnd;
-				if($product->Inventory==0){
+				//if($product->Inventory==0){
 					//Voreingestellten Bestand übernehmen
-					//$product->Inventory=$product->PreSaleInventory;
-				}
+					$product->Inventory=$product->PreSaleInventory;
+				//}
 				$this->owner->extend('HOOK_Order_ProductListExtension_AfterWrite_Product', $product);
 				$product->write(); // saves the record
 			}

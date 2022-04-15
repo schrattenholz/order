@@ -4,6 +4,7 @@ namespace Schrattenholz\Order;
 
 use SilverStripe\ORM\DataObject;
 use Silverstripe\Forms\TextField;
+use Silverstripe\Forms\LiteralField;
 use Silverstripe\Forms\NumericField;
 use Silverstripe\Forms\CheckboxField;
 use Silverstripe\Forms\DropdownField;
@@ -128,6 +129,7 @@ class Preis extends DataObject
 		$amount=TextField::create('Amount','Menge (Gewicht in Gramm)');
 		$attributes=new ListboxField("Attributes", "Produktattribute",Attribute::get()->map("ID", "Title", "Bitte auswählen"));
 		$fields->addFieldsToTab('Root.Main', [
+			LiteralField::create("ProduktTitel","<h2>".$this->getProductTitle()."</h2>"),
 			TextField::create('Content','Freitext (z.B: 1/4 Rad)'),
 			$attributes,
             $num,
