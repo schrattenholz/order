@@ -39,7 +39,8 @@ class Preis extends DataObject
 		'Product'=>Product::Class
 	];
 	private static $many_many=[
-		'Attributes'=>Attribute::class
+		'Attributes'=>Attribute::class,
+		'AttributesIntern'=>Attribute::class
 	];
 	private static $summary_fields = [
 	'Content'=>'Content',

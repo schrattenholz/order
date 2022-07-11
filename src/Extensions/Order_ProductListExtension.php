@@ -92,9 +92,8 @@ class Order_ProductListExtension extends DataExtension{
 		
 			$attributesMap=Attribute::get()->map("ID", "Title", "Bitte auswählen");
 			$editableColumns->setDisplayFields(array(
-
-				'Attributes'  =>array(
-						'title'=>'Produktattribute',
+				'AttributesIntern'  =>array(
+						'title'=>'Interne Attribute',
 						'callback'=>function($record, $column, $grid) use($attributesMap){
 							return  ListboxField::create($column,'Attribute',$attributesMap);
 					}),
@@ -118,7 +117,7 @@ class Order_ProductListExtension extends DataExtension{
 					array_push($attributes,$attr->ID);
 				}
 
-				$data=Preis::get()->filter('Attributes.ID',$attributes)->sort('Product.ID');
+				$data=Preis::get()->filter('AttributesIntern.ID',$attributes)->sort('Product.ID');
 				//filter(['Attributes'=>$attributes])->sort('ProductID');
 			}else{
 				$data=Preis::get()->sort('Product.ID');
@@ -175,7 +174,7 @@ class Order_ProductListExtension extends DataExtension{
 				array_push($attributes,$attr->ID);
 			}
 			
-			$data=Preis::get()->filter('Attributes.ID',$attributes)->sort('Product.ID');
+			$data=Preis::get()->filter('AttributesIntern.ID',$attributes)->sort('Product.ID');
 		}else{
 			$data=Preis::get();
 		}

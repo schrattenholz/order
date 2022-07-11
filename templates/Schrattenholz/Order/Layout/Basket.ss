@@ -12,10 +12,13 @@
 	color: #b4bf5e;
 }
  </style>
- 
- <% include PageTitleOverlap %>
+  <% include PageTitleOverlap %>
   <div class="container pb-5 mb-2 mb-md-4">
       <div class="row">
+	  <% loop $CheckoutChain %>
+	  <li>$Data.Title</li>
+	  
+	  <% end_loop %>
         <!-- List of items-->
         <section class="col-lg-8">
           <div class="d-flex justify-content-between align-items-center pt-3 pb-2 pb-sm-5 mt-1">

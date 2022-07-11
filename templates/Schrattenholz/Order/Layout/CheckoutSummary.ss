@@ -59,8 +59,9 @@
           <div class="d-none d-lg-flex pt-4">
 		  
 					 
-            <div class="w-50 pr-3"><a class="btn btn-secondary btn-block" href="$LinkCheckoutDelivery"><i class="czi-arrow-left mt-sm-0 mr-1"></i><span class="d-none d-sm-inline">Zurück zu den Lieferoptionen</span><span class="d-inline d-sm-none">Zurück</span></a></div>
-            <div class="w-50 pl-2"><button type="submit" class="bestellenBtn btn btn-primary btn-block" link="$LinkCheckoutFinal"><span class="d-none d-sm-inline">Verbindlich bestellen</span><span class="d-inline d-sm-none">Verbindlich bestellen</span><i class="czi-arrow-right mt-sm-0 ml-1"></i></button></div>
+            <div class="w-50 pr-3"><a class="btn btn-secondary btn-block" href="$CheckoutChain.Last.Link"><i class="czi-arrow-left mt-sm-0 mr-1"></i><span class="d-none d-sm-inline">Zurück zu $CheckoutChain.Last.MenuTitle</span><span class="d-inline d-sm-none">Zurück</span></a></div>
+			
+            <div class="w-50 pl-2"><button type="submit" class="bestellenBtn btn btn-primary btn-block" link="$CheckoutChain.Next.Link"><span class="d-none d-sm-inline">Verbindlich bestellen</span><span class="d-inline d-sm-none">Verbindlich bestellen</span><i class="czi-arrow-right mt-sm-0 ml-1"></i></button></div>
           </div>
 
 <% end_if %>
@@ -104,7 +105,7 @@
 				  <li><span class="text-muted">E-Mail:&nbsp;</span>$CheckoutAddress.Email</li>
                 </ul>
           </div>
-
+<% if $DeliveryIsActive %>
 		  <div class="cz-sidebar-static rounded-lg box-shadow-lg ml-lg-auto mt-3">
             <h2 class="h6 mb-4 text-center text-md-left"><i class="h6 text-body czi-package"></i>&nbsp;Lieferart</h4>
                 
@@ -123,6 +124,13 @@
 				  <% end_if %>
                 </ul>
           </div>
+<% else %>
+<div class="cz-sidebar-static rounded-lg box-shadow-lg ml-lg-auto mt-3">
+            <h2 class="h6 mb-4 text-center text-md-left"><i class="h6 text-body czi-package"></i>&nbsp;Lieferung und Bezahlung</h2>
+                
+                <p>Wie bereits mit Ihnen vereinbart.</p>
+          </div>
+<% end_if %>
 		 <% else %>
 		 		  <div class="cz-sidebar-static rounded-lg box-shadow-lg ml-lg-auto mt-3">
             <h2 class="h6 mb-4 text-center text-md-left"><i class="h6 text-body czi-euro-circle"></i>Leerer Warenkorb</h4>
@@ -136,14 +144,14 @@
       <div class="row d-lg-none">
         <div class="col-12">
           <div class="d-flex pt-4 mt-3">
-            <div class="w-100 "><button type="submit" class="bestellenBtn btn btn-primary btn-block" link="$LinkCheckoutFinal"><span class="d-none d-sm-inline">Verbindlich bestellen</span><span class="d-inline d-sm-none">Verbindlich bestellen</span><i class="czi-arrow-right mt-sm-0 ml-1"></i></button></div>
+            <div class="w-100 "><button type="submit" class="bestellenBtn btn btn-primary btn-block" link="$CheckoutChain.Next.Link"><span class="d-none d-sm-inline">Verbindlich bestellen</span><span class="d-inline d-sm-none">Verbindlich bestellen</span><i class="czi-arrow-right mt-sm-0 ml-1"></i></button></div>
           </div>
         </div>
       </div>
       <div class="row d-lg-none">
         <div class="col-12">
           <div class="d-flex pt-0 mt-3">
-            <div class="w-100 "><a class="btn btn-secondary btn-block" href="$LinkCheckoutDelivery"><i class="czi-arrow-left mt-sm-0 mr-1"></i><span class="d-none d-sm-inline">Zurück zu den Lieferoptionen</span><span class="d-inline d-sm-none">Zurück</span></a></div>
+            <div class="w-100 "><a class="btn btn-secondary btn-block" href="$CheckoutChain.Last.Link"><i class="czi-arrow-left mt-sm-0 mr-1"></i><span class="d-none d-sm-inline">Zurück zu $CheckoutChain.Last.MenuTitle</span><span class="d-inline d-sm-none">Zurück</span></a></div>
         </div>
       </div>
     </div>

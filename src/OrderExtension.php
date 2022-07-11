@@ -151,20 +151,40 @@ class OrderExtension extends DataExtension {
 		$CheckoutAddress=SiteTree::get()->where('ID='.$orderConfig->CheckoutAddressID)->First();
 		return $CheckoutAddress->Link();	
 	}
+	public function getCheckoutAddressPage(){
+		$orderConfig=OrderConfig::get()->First();
+		$CheckoutAddress=SiteTree::get()->where('ID='.$orderConfig->CheckoutAddressID)->First();
+		return $CheckoutAddress;	
+	}
 	public function getLinkBasket(){
 		$orderConfig=OrderConfig::get()->First();
 		$basket=SiteTree::get()->where('ID='.$orderConfig->BasketID)->First();
 		return $basket->Link();	
+	}
+	public function getBasketPage(){
+		$orderConfig=OrderConfig::get()->First();
+		$basket=SiteTree::get()->where('ID='.$orderConfig->BasketID)->First();
+		return $basket;	
 	}
 	public function getLinkCheckoutSummary(){
 		$orderConfig=OrderConfig::get()->First();
 		$checkoutSummary=SiteTree::get()->where('ID='.$orderConfig->CheckoutSummaryID)->First();
 		return $checkoutSummary->Link();	
 	}
+	public function getCheckoutSummaryPage(){
+		$orderConfig=OrderConfig::get()->First();
+		$checkoutSummary=SiteTree::get()->where('ID='.$orderConfig->CheckoutSummaryID)->First();
+		return $checkoutSummary;	
+	}
 	public function getLinkCheckoutFinal(){
 		$orderConfig=OrderConfig::get()->First();
 		$checkoutFinal=SiteTree::get()->where('ID='.$orderConfig->CheckoutFinalID)->First();
 		return $checkoutFinal->Link();	
+	}
+	public function getCheckoutFinalPage(){
+		$orderConfig=OrderConfig::get()->First();
+		$checkoutFinal=SiteTree::get()->where('ID='.$orderConfig->CheckoutFinalID)->First();
+		return $checkoutFinal;	
 	}
 	public function getWarenkorbData(){
 		$request = Injector::inst()->get(HTTPRequest::class);
