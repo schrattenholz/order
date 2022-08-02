@@ -16,26 +16,30 @@
                 <h3 class="product-title font-size-base mb-2"><a href="$Product.Link?id=$ID&v=$PriceBlockElement.ID&vac=$Vacuum">$Product.SummaryTitle</a></h3>
                 <% if $PriceBlockElement %>
 					<div class="font-size-sm">
-					<span class="text-muted mr-2"><% loop $PriceBlockElement %>$FullTitle<% end_loop %></span>
+					<span class="text-muted mr-2 text-right"><% loop $PriceBlockElement %>$FullTitle<% end_loop %></span>
 					</div>
 					
 				<% end_if %>
 				<% if $ProductOptions.Filter('Active',1).Count>0 %>
-				<h6>Zusatzoptionen</h6>
+				<h6 class="mt-3 font-size-base">Zusatzoptionen</h6>
 					<dl class="row mb-0 font-size-xs">
 					<% loop $ProductOptions %>
 						<% if  $ProductOptions_ProductContainer.Active  %>
 						<dt class="col-sm-9 mb-0">$Title</dt>
-							  <dd class="col-sm-3 mb-0 font-size-xs"> $Top.formattedNumber($ProductOptions_ProductContainer.Price) &euro;</dd>
+							  <dd class="col-sm-3 mb-0 font-size-xs text-right"> $Top.formattedNumber($ProductOptions_ProductContainer.Price) &euro;</dd>
 						<% end_if %>
 					<% end_loop %>
 					</dl>
 				<% end_if %>
-                <div class="font-size-lg text-accent pt-2"><% if $CompletePrice.CaPrice %>ca. <% end_if %>$Top.formattedNumber($CompletePrice.Price) &euro;</div>
+                <div class="font-size-lg text-accent pt-2 text-right"><% if $CompletePrice.CaPrice %>ca. <% end_if %>$Top.formattedNumber($CompletePrice.Price) &euro;</div>
               </div>
             </div>
             <div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-right" style="max-width: 9rem;">
-              <p class="mb-0"><span class="text-muted font-size-sm"><% if $PriceBlockElement.Portionable %>Menge<% else %>Anzahl in Stück<% end_if %>:</span><span>&nbsp;<% if $PriceBlockElement.Portionable %>$Top.formattedWeight($Quantity)<% else %>$Quantity<% end_if %></span></p>
+              <p class="mb-0">
+				  <span class="text-muted font-size-sm">
+				  <% if $PriceBlockElement.Portionable %>Menge<% else %>Anzahl in Stück<% end_if %>:</span><span>&nbsp;<% if $PriceBlockElement.Portionable %>$Top.formattedWeight($Quantity)<% else %>$Quantity<% end_if %>
+				  </span>
+			  </p>
               <!--<button class="btn btn-link px-0" type="button"><i class="czi-edit mr-2"></i><span class="font-size-sm">Edit</span></button>-->
             </div>
           </div>

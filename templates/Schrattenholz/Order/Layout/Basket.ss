@@ -29,7 +29,7 @@
 	 
           <!-- Item-->
           <div id="pc_$ID" data-productID="$ProductID" data-title="$Product.Title" data-variant01="$PriceBlockElementID" class="row d-sm-flex justify-content-between align-items-center my-4 pb-3 border-bottom">
-            <div class="col-8 media media-ie-fix d-block d-sm-flex align-items-center text-center text-sm-left w-100"><a class="d-inline-block mx-auto mr-sm-4" href="$Product.Link?id=$ID&v=$PriceBlockElement.ID&vac=$Vacuum" style="width: 10rem;"><img src="$Product.CoverImage.Fill(200,200).URL" alt="Zum Produkt wechseln"></a>
+            <div class="col-8 media media-ie-fix d-block d-sm-flex align-items-center text-center text-sm-left w-100"><a class="d-inline-block mx-auto mr-sm-4" href="$Product.Link?id=$ID&v=$PriceBlockElement.ID&vac=$Vacuum" style="width: 10rem;"><img src="$Product.DefaultImage.Fill(200,200).URL" alt="Zum Produkt wechseln"></a>
               <div class="media-body pt-2">
                 <h3 class="product-title font-size-base mb-2"><a href="$Product.Link?id=$ID&v=$PriceBlockElement.ID&vac=$Vacuum">$Product.SummaryTitle</a></h3>
                 <% if $PriceBlockElement %>
@@ -38,7 +38,8 @@
 					</div>
 					
 				<% end_if %>
-				<% if $ProductOptions.ProductOptions_ProductContainer.Filter('Active',1).Count>0 %>
+				<% if $ProductOptions.Filter('Active',1).Count>0 %>
+				<h6>Zusatzoptionen</h6>
 					<dl class="row mb-0 font-size-xs">
 					<% loop $ProductOptions %>
 						<% if  $ProductOptions_ProductContainer.Active  %>
