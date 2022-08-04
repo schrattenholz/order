@@ -44,7 +44,7 @@
 					<% loop $ProductOptions %>
 						<% if  $ProductOptions_ProductContainer.Active  %>
 						<dt class="col-sm-9 mb-0">$Title</dt>
-							  <dd class="col-sm-3 mb-0 font-size-xs"> $Top.formattedNumber($ProductOptions_ProductContainer.Price) &euro;</dd>
+							  <dd class="col-sm-3 mb-0 font-size-xs text-right"> $Top.formattedNumber($ProductOptions_ProductContainer.Price) &euro;</dd>
 						<% end_if %>
 					<% end_loop %>
 					</dl>
@@ -68,7 +68,7 @@
 							max="<% if $Top.loadSelectedParametersFromTemplate($ProductID,$PriceBlockElementID).ProductDetails.Portionable %>$Top.loadSelectedParametersFromTemplate($ProductID,$PriceBlockElementID).ProductDetails.PortionMax<% else %>$Top.loadSelectedParametersFromTemplate($ProductID,$PriceBlockElementID).ClientsQuantityMax<% end_if %>" 
 							step="<% if $Top.loadSelectedParametersFromTemplate($ProductID,$PriceBlockElementID).ProductDetails.Portionable %>$Top.loadSelectedParametersFromTemplate($ProductID,$PriceBlockElementID).ProductDetails.Portion<% else %>1<% end_if %>"
 							onchange="calculatePrice(this.value)" 
-							value="<% if $Top.loadSelectedParametersFromTemplate($ProductID,$PriceBlockElementID).Quantity>0 %><% if $Top.loadSelectedParametersFromTemplate($ProductID,$PriceBlockElementID).ProductDetails.Portionable %>$Top.formattedWeight($Top.loadSelectedParametersFromTemplate($ProductID,$PriceBlockElementID).Quantity)<% else %>$Top.loadSelectedParametersFromTemplate($ProductID,$PriceBlockElementID).Quantity<% end_if %><% else %><% if $Top.loadSelectedParametersFromTemplate($ProductID,$PriceBlockElementID).ProductDetails.Portionable %>{$Top.loadSelectedParametersFromTemplate($ProductID,$PriceBlockElementID).ProductDetails.PortionMin}g<% else %>0<% end_if %><% end_if %>">
+							value="<% if $Top.loadSelectedParametersFromTemplate($ProductID,$PriceBlockElementID).Quantity>0 %><% if $Top.loadSelectedParametersFromTemplate($ProductID,$PriceBlockElementID).ProductDetails.Portionable %>$Top.formattedWeight($Top.loadSelectedParametersFromTemplate($ProductID,$PriceBlockElementID).Quantity)<% else %>$Quantity<% end_if %><% else %><% if $Top.loadSelectedParametersFromTemplate($ProductID,$PriceBlockElementID).ProductDetails.Portionable %>{$Top.loadSelectedParametersFromTemplate($ProductID,$PriceBlockElementID).ProductDetails.PortionMin}g<% else %>0<% end_if %><% end_if %>">
 							<script>
 							jQuery("#pc_{$ID}_amount").on("change",function(){
 							
