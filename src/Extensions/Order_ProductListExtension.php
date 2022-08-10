@@ -106,10 +106,16 @@ class Order_ProductListExtension extends DataExtension{
 						'title'=>utf8_encode('Stückzahl'),
 						'callback'=>function($record, $column, $grid) {
 							return NumericField::create($column)->setScale(0);
+					}),
+					'NotInPresale'  =>array(
+						'title'=>utf8_encode('Vom Vorverkauf ausschließen'),
+						'callback'=>function($record, $column, $grid) {
+							$record->NotInPresale=0;
+							return CheckboxField::create($column);
 					})
 			));
 			//$fields->addFieldToTab("Root.Produkte",CheckboxField::create("ShowProducts","Produktliste anzeigen"));
-			//Injector::inst()->get(LoggerInterface::class)->error('gefilterte Produkte anzeigen '.$this->owner->Attributes()->Count());
+			
 			if($this->owner->Attributes()->Count()>0){
 				//Injector::inst()->get(LoggerInterface::class)->error('gefilterte Produkte anzeigen');
 				$attributes=[];
@@ -183,15 +189,19 @@ class Order_ProductListExtension extends DataExtension{
 		if($this->owner->InPreSale){
 			foreach($data as $product){
 				Injector::inst()->get(LoggerInterface::class)->error('in PreSale setzen id'.$product->ID);
-				$product->InPreSale=true;
-				$product->PreSaleStart=$this->owner->PreSaleStart;
-				$product->PreSaleEnd=$this->owner->PreSaleEnd;
-				//if($product->Inventory==0){
-					//Voreingestellten Bestand übernehmen
-					$product->Inventory=$product->PreSaleInventory;
-				//}
-				$this->owner->extend('HOOK_Order_ProductListExtension_AfterWrite_Product', $product);
-				$product->write(); // saves the record
+				
+					$product->InPreSale=true;
+					$product->PreSaleStart=$this->owner->PreSaleStart;
+					$product->PreSaleEnd=$this->owner->PreSaleEnd;
+					if($product->Inventory==0 && $product->NotInPresale==false){
+						//Voreingestellten Bestand übernehmen
+						$product->Inventory=$product->PreSaleInventory;
+					}else if($product->NotInPresale==true){
+						$product->Inventory=0;
+					}
+					$this->owner->extend('HOOK_Order_ProductListExtension_AfterWrite_Product', $product);
+					$product->write(); // saves the record
+				
 			}
 		}else if($this->owner->ResetPreSale){
 			foreach($data as $product){

@@ -33,7 +33,8 @@ class Preis extends DataObject
 		'Vacuum'=>'Boolean',
 		'ShowAmount'=>'Boolean',
 		'ShowContent'=>'Boolean',
-		'Unit'=>'Enum("weight,piece","weight")'
+		'Unit'=>'Enum("weight,piece","weight")',
+		'NotInPresale'=>'Boolean'
 	);
 	private static $has_one = [
 		'Product'=>Product::Class
@@ -129,10 +130,12 @@ class Preis extends DataObject
 		$unit=new DropdownField("Unit","Einheit",singleton('Schrattenholz\Order\Preis')->dbObject('Unit')->enumValues());
 		$amount=TextField::create('Amount','Menge (Gewicht in Gramm)');
 		$attributes=new ListboxField("Attributes", "Produktattribute",Attribute::get()->map("ID", "Title", "Bitte auswählen"));
+		$attributesIntern=new ListboxField("AttributesIntern", "Produktattribute (intern)",Attribute::get()->map("ID", "Title", "Bitte auswählen"));
 		$fields->addFieldsToTab('Root.Main', [
 			LiteralField::create("ProduktTitel","<h2>".$this->getProductTitle()."</h2>"),
 			TextField::create('Content','Freitext (z.B: 1/4 Rad)'),
 			$attributes,
+			$attributesIntern,
             $num,
 			$caprice,
 			HiddenField::create('Curreny','EUR'),
