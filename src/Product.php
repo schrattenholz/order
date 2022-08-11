@@ -48,6 +48,26 @@ class Product extends Page
 		'ShowQualityLabel'=>'Boolean(1)'
 	);
 
+	public function getSetOutOfStock()
+    {
+        if($this->OutOfStock==true	){
+			return false;
+		}else{
+			return false;
+		}
+    }
+
+    public function getStatusFlags($cached = true) 
+    {
+        $flags = parent::getStatusFlags($cached);
+		 if($this->OutOfStock==true	){
+			  $flags['outofstock']="";
+		}      
+        return $flags;
+    }
+
+
+
 	private static $has_many = [
 		//Produktvarianten
 		'Preise'=>Preis::class

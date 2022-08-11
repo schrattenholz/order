@@ -13,4 +13,5 @@ class ProductController extends PageController{
         parent::init();
 		//Requirements::javascript('public/resources/vendor/schrattenholz/order/template/javascript/order.js');
 	}
+
 }
