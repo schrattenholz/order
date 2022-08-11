@@ -170,6 +170,7 @@ if(jQuery('#checkoutSummary').length>0){
 			if (oldValue >=  input.attr('max')) {
 				newVal = oldValue;
 			}
+			
 			if(portionable==1){
 				if(newVal>=1000){
 					newVal=(newVal/1000).toFixed(2)+"kg";
@@ -181,6 +182,7 @@ if(jQuery('#checkoutSummary').length>0){
 			}
 			spinner.find("input").val(newVal.toString().replace(".",","));
 			spinner.find("input").trigger("change");
+			calculatePrice();
 		});
 
 		btnDown.click(function() {
@@ -206,6 +208,7 @@ if(jQuery('#checkoutSummary').length>0){
 			}
 			spinner.find("input").val(newVal.toString().replace(".",","));
 			spinner.find("input").trigger("change");
+			calculatePrice();
 		});
 
 	});

@@ -136,6 +136,7 @@
         });
     }
 function refreshSelectedProduct(action){
+alert("refreshSelectedProduct");
 		if(jQuery('#variant01 option[value=' + jQuery('#variant01').val() + ']').attr('data-vac')=="1"){
 			jQuery('#vac_container').fadeTo(200,1);
 		}else{
@@ -189,7 +190,7 @@ function refreshSelectedProduct(action){
 				}
 				jQuery('#Quantity').html(data.QuantityLeft);
 				jQuery('#amount').attr('max',possibleQuantity);
-				calculatePrice(jQuery('#amount').val());
+				calculatePrice();
 				showHideEditFunction(quantity);
 			}
 		});
