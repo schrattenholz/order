@@ -208,11 +208,13 @@ class Product extends Page
 	public function BasicExtension_DefaultImage($defaultImage){
 		Injector::inst()->get(LoggerInterface::class)->info('Product::BasicExtension_DefaultImage');
 		if (!$defaultImage){
-			//Injector::inst()->get(LoggerInterface::class)->error('BlogExtension.php BasicExtension_DefaultImage Dummy=');
+			Injector::inst()->get(LoggerInterface::class)->error('BlogExtension.php BasicExtension_DefaultImage MainImage');
 			$defaultImage->DefaultImage= $this->Childern()->First()->DefaultImage();
 		}else if($this->ProductImages()->Count()>0){
+			Injector::inst()->get(LoggerInterface::class)->error('BlogExtension.php BasicExtension_DefaultImage ProductImages');
 			return $this->ProductImages()->First();
 		}else{
+			Injector::inst()->get(LoggerInterface::class)->error('BlogExtension.php BasicExtension_DefaultImage DefaultImage');
 			return OrderConfig::get()->First()->ProductImage();
 		}
 		return $defaultImage;
