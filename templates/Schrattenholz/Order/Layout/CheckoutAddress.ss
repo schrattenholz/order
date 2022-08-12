@@ -73,8 +73,34 @@
 	</div>
 	
 <script>
+jQuery( document ).ready(function() {
+	var createUserAccountCK=jQuery("#OrderProfileFeature_RegistrationForm_useraccounttab_CreateUserAccount");
+	createUserAccountCK.on("change", function(){
+		if(jQuery(this).prop("checked")==true){
+			var label=jQuery("#OrderProfileFeature_RegistrationForm_useraccounttab_Street_Holder label");
+			label.html(label.html()+"*");
+			jQuery("#OrderProfileFeature_RegistrationForm_useraccounttab_Street").attr("required","required");
+			var label=jQuery("#OrderProfileFeature_RegistrationForm_useraccounttab_ZIP_Holder label");
+			label.html(label.html()+"*");
+			jQuery("#OrderProfileFeature_RegistrationForm_useraccounttab_ZIP").attr("required","required");
+			var label=jQuery("#OrderProfileFeature_RegistrationForm_useraccounttab_City_Holder label");
+			label.html(label.html()+"*");
+			jQuery("#OrderProfileFeature_RegistrationForm_useraccounttab_City").attr("required","required");
+		}else{
+			var label=jQuery("#OrderProfileFeature_RegistrationForm_useraccounttab_Street_Holder label");
+			label.html(label.html().slice(0, -1));
+			jQuery("#OrderProfileFeature_RegistrationForm_useraccounttab_Street").removeAttr("required");
+			var label=jQuery("#OrderProfileFeature_RegistrationForm_useraccounttab_ZIP_Holder label");
+			label.html(label.html().slice(0, -1));
+			jQuery("#OrderProfileFeature_RegistrationForm_useraccounttab_ZIP").removeAttr("required");
+			var label=jQuery("#OrderProfileFeature_RegistrationForm_useraccounttab_City_Holder label");
+			label.html(label.html().slice(0, -1));
+			jQuery("#OrderProfileFeature_RegistrationForm_useraccounttab_City").removeAttr("required");
+		}
 
+	});
 
+});
 function loginMember(){
 	console.log("loginMember");
 	var pageLink='$Link';
