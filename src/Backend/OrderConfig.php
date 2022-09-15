@@ -16,7 +16,6 @@ class OrderConfig extends DataObject
 		'ConfirmationMailBeforeContent'=>'HTMLText',
 		'ConfirmationMailAfterContent'=>'HTMLText',
 		'EmailSignature'=>'HTMLText',
-		'VacuumPrice'=>'Decimal(6,2)',
 		'ProductFooter'=>'HTMLText',
 		'OpeningDaysText'=>'HTMLText'
 	);
