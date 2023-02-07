@@ -170,7 +170,7 @@ class Product extends Page
 		$fields->addFieldToTab("Root.Main",new ListboxField("Ingredients", "Zutaten",Ingredient::get()->map("ID", "Title", "Bitte auswählen")),"Content");
 		//$fields->addFieldToTab("Root.Shop", $vac,"Content");
 		$fields->addFieldToTab("Root.Main", new TextField('GlobalProductSort'),"Content");
-		$fields->addFieldToTab("Root.Main", $showQualitiyLabel,"HeaderImage");
+		$fields->addFieldToTab("Root.Main", $showQualitiyLabel,"Content");
 		$fields->addFieldToTab("Root.Shop", $caprice,"Content");
 		$fields->addFieldToTab("Root.Shop",$unit,"Content");
 		$fields->addFieldToTab("Root.Shop", $price,"Content");
