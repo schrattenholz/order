@@ -17,7 +17,8 @@ class OrderConfig extends DataObject
 		'ConfirmationMailAfterContent'=>'HTMLText',
 		'EmailSignature'=>'HTMLText',
 		'ProductFooter'=>'HTMLText',
-		'OpeningDaysText'=>'HTMLText'
+		'OpeningDaysText'=>'HTMLText',
+		'ShopIsActive'=>'Boolean(1)'
 	);
 	private static $table_name="shopconfig";
 	private static $has_one=array(
