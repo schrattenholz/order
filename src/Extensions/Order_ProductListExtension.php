@@ -60,7 +60,7 @@ class Order_ProductListExtension extends DataExtension{
 	
 	// Extension for Product::getCMSFields
 	public function addExtension(FieldList $fields){
-		if($this->owner->ID==OrderConfig::get()->First()->ProductRootID){
+		if($this->owner->ID==OrderConfig::get()->First()->ProductRootID or $this->owner->Design=="Abverkaufliste"){
 			$fields->addFieldToTab('Root.Produkte',new CheckboxField('InPreSale','Vorverkauf'));
 			$fields->addFieldToTab('Root.Produkte',new CheckboxField('ResetPreSale','Vorverkauf beenden'));
 			$fields->addFieldToTab('Root.Produkte',new DateField('PreSaleStart','Start des Vorverkauf'));
@@ -128,16 +128,13 @@ class Order_ProductListExtension extends DataExtension{
 			}else{
 				$data=Preis::get()->sort('Product.ID');
 			}
+			if($this->owner->ID!=OrderConfig::get()->First()->ProductRootID){
+				
+				$data=$data->filter("Product.ParentID",$this->owner->ID);
+			}
 			$products=GridField::create('Preise','Produktvarianten',$data,$gridFieldConfig);
-			
-			
-			
-				$fields->addFieldToTab('Root.Produkte',$products);
-			
-			
-			
-			
-			
+			$fields->addFieldToTab('Root.Produkte',$products);
+
 			//Produkte, erweitert um Quantity
 
 
@@ -171,7 +168,7 @@ class Order_ProductListExtension extends DataExtension{
 	}
 	public function onAfterWrite(){
 		
-		if($this->owner->ID==OrderConfig::get()->First()->ProductRootID){
+		if($this->owner->ID==OrderConfig::get()->First()->ProductRootID  or $this->owner->Design=="Abverkaufliste"){
 		//Ausgewählte Produktvarianten holen
 		//Injector::inst()->get(LoggerInterface::class)->error('onAfterWrite ProductList id');
 		if($this->owner->Attributes()->Count()>0){
@@ -185,7 +182,10 @@ class Order_ProductListExtension extends DataExtension{
 			$data=Preis::get();
 		}
 		//Varianten in Vorverkauf setzen
-		
+		if($this->owner->ID!=OrderConfig::get()->First()->ProductRootID){
+				
+				$data=$data->filter("Product.ParentID",$this->owner->ID);
+			}
 		if($this->owner->InPreSale){
 			foreach($data as $product){
 				Injector::inst()->get(LoggerInterface::class)->error('in PreSale setzen id'.$product->ID);
@@ -196,8 +196,11 @@ class Order_ProductListExtension extends DataExtension{
 					if($product->Inventory==0 && $product->NotInPresale==false){
 						//Voreingestellten Bestand übernehmen
 						$product->Inventory=$product->PreSaleInventory;
+						$product->PreSaleStartInventory=$product->PreSaleInventory;
 					}else if($product->NotInPresale==true){
 						$product->Inventory=0;
+					}else if($product->Inventory!=0 && $product->NotInPresale==false){
+						$product->PreSaleStartInventory=$product->Inventory;
 					}
 					$this->owner->extend('HOOK_Order_ProductListExtension_AfterWrite_Product', $product);
 					$product->write(); // saves the record
