@@ -4,6 +4,9 @@ SilverStripe\CMS\Controllers\ContentController:
 SilverStripe\CMS\Model\SiteTree:
   extensions:
     - Schrattenholz\Order\OrderExtension
+Schrattenholz\Order\Preis:
+  extensions:
+    - Schrattenholz\Order\OrderExtension
 Schrattenholz\Order\ProductList:
   extensions:
     - Schrattenholz\Order\Order_ProductListExtension

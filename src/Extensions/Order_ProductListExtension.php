@@ -89,7 +89,7 @@ class Order_ProductListExtension extends DataExtension{
 			;
 
 			//$fields->addFieldToTab('Root.Produkte',LiteralField::create("test","".);
-		
+
 			$attributesMap=Attribute::get()->map("ID", "Title", "Bitte auswählen");
 			$editableColumns->setDisplayFields(array(
 				'AttributesIntern'  =>array(
@@ -107,6 +107,10 @@ class Order_ProductListExtension extends DataExtension{
 						'callback'=>function($record, $column, $grid) {
 							return NumericField::create($column)->setScale(0);
 					}),
+				'SoldRatioInventory'  =>array(
+						'title' => 'Verkauft',
+						'field'=>ReadonlyField::class
+					),
 					'NotInPresale'  =>array(
 						'title'=>utf8_encode('Vom Vorverkauf ausschließen'),
 						'callback'=>function($record, $column, $grid) {
@@ -215,6 +219,13 @@ class Order_ProductListExtension extends DataExtension{
 				$this->owner->extend('HOOK_Order_ProductListExtension_AfterWrite_Product', $product);
 				$product->write(); // saves the record
 			}
+		}else{
+			foreach($data as $product){
+						$product->PreSaleStartInventory=$product->Inventory;
+					
+					$this->owner->extend('HOOK_Order_ProductListExtension_AfterWrite_Product', $product);
+					$product->write(); // saves the record
+		}	
 		}
 		$this->owner->extend('HOOK_Order_ProductListExtension_AfterWrite', $this->owner);
 		parent::onAfterWrite();
