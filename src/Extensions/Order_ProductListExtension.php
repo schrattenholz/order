@@ -235,5 +235,6 @@ class Order_ProductListExtension extends DataExtension{
 		
 	}
 	
-	}
+	
 }
+
