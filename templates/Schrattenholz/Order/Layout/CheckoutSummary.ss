@@ -11,7 +11,8 @@
        <% loop $Basket.ProductContainers.Sort("ProductSort") %>
 		 <!-- Item-->
           <div class="d-sm-flex justify-content-between my-4 pb-3 border-bottom">
-            <div class="media media-ie-fix d-block d-sm-flex text-center text-sm-left w-100"><a class="d-inline-block mx-auto mr-sm-4" href="$Product.Link?id=$ID&v=$PriceBlockElement.ID&vac=$Vacuum" style="width: 10rem;"><img src="$Product.ProductImages.First.Fill(200,200).URL" alt="Zum Produkt wechseln"></a>
+            <div class="media media-ie-fix d-block d-sm-flex text-center text-sm-left w-100">
+			<a class="d-inline-block mx-auto mr-sm-4" href="$Product.Link?id=$ID&v=$PriceBlockElement.ID&vac=$Vacuum" style="width: 10rem;"><img src="$Product.ProductImages.First.Fill(200,200).URL" alt="Zum Produkt wechseln"></a>
               <div class="media-body pt-2">
                 <h3 class="product-title font-size-base mb-2"><a href="$Product.Link?id=$ID&v=$PriceBlockElement.ID&vac=$Vacuum">$Product.SummaryTitle</a></h3>
                 <% if $PriceBlockElement %>
@@ -32,19 +33,30 @@
 					</dl>
 				<% end_if %>
                 <div class="font-size-lg text-accent pt-2 text-right"><% if $CompletePrice.CaPrice %>ca. <% end_if %>$Top.formattedNumber($CompletePrice.Price) &euro;</div>
-              </div>
-            </div>
-            <div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-right" style="max-width: 9rem;">
-              <p class="mb-0">
-				  <span class="text-muted font-size-sm">
+				<span class="text-muted font-size-sm">
 				  <% if $PriceBlockElement.Portionable %>Menge<% else %>Anzahl in Stück<% end_if %>:</span><span>&nbsp;<% if $PriceBlockElement.Portionable %>$Top.formattedWeight($Quantity)<% else %>$Quantity<% end_if %>
 				  </span>
-			  </p>
-              <!--<button class="btn btn-link px-0" type="button"><i class="czi-edit mr-2"></i><span class="font-size-sm">Edit</span></button>-->
+              </div>
             </div>
+            
           </div>
 		  <% end_loop %>
+<% if $DeliveryIsActive && $Basket.DeliveryType.Price>0 %>
+		 <!-- Item-->
+          <div class="d-sm-flex justify-content-between my-4 pb-3 border-bottom">
+            <div class="media media-ie-fix d-block d-sm-flex text-center text-sm-left w-100">
+			<span class="d-inline-block mx-auto mr-sm-4" href="$Product.Link?id=$ID&v=$PriceBlockElement.ID&vac=$Vacuum" style="width: 10rem;">&nbsp;</span>
+              <div class="media-body pt-2">
+                <h3 class="product-title font-size-base mb-2"><a href="$Product.Link?id=$ID&v=$PriceBlockElement.ID&vac=$Vacuum">Lieferart: $Basket.DeliveryType.Title</a></h3>
+               
+				
+                <div class="font-size-lg text-accent pt-2 text-right">$Top.formattedNumber($Basket.DeliveryType.Price) &euro;</div>
+              </div>
+            </div>
+            
+          </div>
 
+<% end_if %>
 <!-- Client details-->
 <form id="checkoutSummary" class="needs-validation" novalidate>
 		  <div class="custom-control custom-checkbox  pt-3 mt-4 border-top">
@@ -78,19 +90,22 @@
 
             <h3 class="font-weight-normal text-right my-4"><% if $Basket.TotalPrice.CaPrice %>ca. <% end_if %>$Top.formattedNumber($Basket.TotalPrice.Price) &euro;</h3>
 			            <ul class="list-unstyled font-size-sm pb-2 border-bottom">
-              <!--<li class="d-flex justify-content-between align-items-center"><span class="mr-2">Preis:</span><span class="text-right"><% if $Basket.TotalPrice.CaPrice %>ca. <% end_if %>$Top.formattedNumber($Basket.TotalPrice.Price) &euro;</span></li>
-              <li class="d-flex justify-content-between align-items-center"><span class="mr-2">Shipping:</span><span class="text-right">—</span></li>-->
+              <!--<li class="d-flex justify-content-between align-items-center"><span class="mr-2">Preis:</span><span class="text-right"><% if $Basket.TotalPrice.CaPrice %>ca. <% end_if %>$Top.formattedNumber($Basket.TotalPrice.Price) &euro;</span></li>-->
+             
               <li class="d-flex justify-content-between align-items-center"><span class="mr-2">
 			  <% if $Top.CurrentOrderCustomerGroup.VatExluded %>
 			  zzgl. 
 			  <% else %>
 			  inkl. 
 			  <% end_if %>
-			  MwSt.({$Top.CurrentOrderCustomerGroup.Vat}%):</span>
+			  MwSt.({$Top.CurrentOrderCustomerGroup.Vat}%) <% if $Basket.TotalPrice.DeliveryVat>0 %> auf Produkte<% end_if %></span>
 			  <span class="text-right">
 				<% if $Basket.TotalPrice.CaPrice %>ca. <% end_if %>$Top.formattedNumber($Basket.TotalPrice.Vat) &euro;
 			  </span>
 			  </li>
+			   <% if $Basket.TotalPrice.DeliveryVat>0 %>
+			   <li class="d-flex justify-content-between align-items-center"><span class="mr-2">inkl. MwSt.(19%) auf $Basket.DeliveryType.Title</span><span class="text-right">$Top.formattedNumber($Basket.TotalPrice.DeliveryVat) &euro;</span></li>
+			   <% end_if %>
              <!-- <li class="d-flex justify-content-between align-items-center"><span class="mr-2">Discount:</span><span class="text-right">—</span></li>-->
             </ul>
 			<p class="font-size-xs">
