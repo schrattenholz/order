@@ -12,7 +12,15 @@
 		 <!-- Item-->
           <div class="d-sm-flex justify-content-between my-4 pb-3 border-bottom">
             <div class="media media-ie-fix d-block d-sm-flex text-center text-sm-left w-100">
-			<a class="d-inline-block mx-auto mr-sm-4" href="$Product.Link?id=$ID&v=$PriceBlockElement.ID&vac=$Vacuum" style="width: 10rem;"><img src="$Product.ProductImages.First.Fill(200,200).URL" alt="Zum Produkt wechseln"></a>
+			<a class="d-inline-block mx-auto mr-sm-4" href="$Product.Link?id=$ID&v=$PriceBlockElement.ID&vac=$Vacuum" style="width: 10rem;">
+			<% if $Product.ProductImages %>
+				<img src="$Product.ProductImages.First.Fill(200,200).URL" alt="Zum Produkt wechseln"
+			<% else %>
+				<img src="$Product.DefaultImage.Fill(200,200).URL" alt="Product"/>
+			<%end_if %>
+			
+			
+			</a>
               <div class="media-body pt-2">
                 <h3 class="product-title font-size-base mb-2"><a href="$Product.Link?id=$ID&v=$PriceBlockElement.ID&vac=$Vacuum">$Product.SummaryTitle</a></h3>
                 <% if $PriceBlockElement %>
