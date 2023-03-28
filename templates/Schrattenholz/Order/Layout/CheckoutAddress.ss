@@ -148,14 +148,14 @@ function loginMember(){
 	});
 
 }
-function checkoutAddress(nextLink,pageLink){
+function checkoutAddress(nextLink,pageLink){	
 	var nextLink='$CheckoutChain.Next.Link';
 	var pageLink='$Link';
-if(jQuery('#CreateUserAccount').is(":checked")){
-	jQuery('#CreateUserAccount_Val').val(1);
-}else{
-jQuery('#CreateUserAccount_Val').val(0);
-}
+	if(jQuery('#OrderProfileFeature_RegistrationForm_useraccounttab_CreateUserAccount').is(":checked")){
+		jQuery('#CreateUserAccount_Val').val(1);
+	}else{
+		jQuery('#CreateUserAccount_Val').val(0);
+	}
 	jQuery('input').each(function(){
 		$(this).removeAttr('disabled');
 	});
