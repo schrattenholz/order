@@ -182,7 +182,7 @@ class Preis extends DataObject
 	public function getNetto($vat){
 		return round($this->Price/100*$vat,2);
 	}
-public function canView($member = null) 
+	public function canView($member = null) 
     {
         return Permission::check('CMS_ACCESS_CMSMain', 'any', $member);
     }
