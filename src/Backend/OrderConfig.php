@@ -51,8 +51,6 @@ class OrderConfig extends DataObject
 		"Logo",
 		"DirectDebitAuthForm"
 	];
-
-}
 	public function canView($member = null) 
     {
         return Permission::check('CMS_ACCESS_CMSMain', 'any', $member);
@@ -72,4 +70,6 @@ class OrderConfig extends DataObject
     {
         return Permission::check('CMS_ACCESS_CMSMain', 'any', $member);
     }
+}
+
 ?>
