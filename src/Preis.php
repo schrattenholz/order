@@ -61,6 +61,10 @@ class Preis extends DataObject
 	public function getProductTitle(){
 		return $this->Product()->Title;
 	}
+	public function getCompleteProductTitle(){		
+		return $this->Product()->getSummaryTitle(). " - ". $this->getFullTitle();		
+	}
+	
 	public function getFullTitle($showBasePrice=true){
 		$data=new ArrayList(["Title"=>"","ShowBasePrice"=>$showBasePrice]);
 		$title=$data->Title;

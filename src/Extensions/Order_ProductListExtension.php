@@ -40,7 +40,7 @@ use SilverStripe\Forms\ListboxField;
 use UncleCheese\DisplayLogic;
 use UncleCheese\DisplayLogic\Forms\Wrapper;
 use Schrattenholz\Delivery\DeliverySetup;
-
+use SilverStripe\Forms\DropdownField;
 class Order_ProductListExtension extends DataExtension{
 	private static $db=[
 		'ResetPreSale' => 'Boolean',
@@ -48,6 +48,7 @@ class Order_ProductListExtension extends DataExtension{
 		'PreSaleInventory'=>'Int',
 		'PreSaleStart'=>'Date',
 		'PreSaleEnd'=>'Date',
+		'PreSaleEndPercentage'=>'Enum("25,50,75,100","100")'
 	];
 	private static $many_many=[
 		'Attributes'=>Attribute::class
@@ -144,6 +145,8 @@ class Order_ProductListExtension extends DataExtension{
 
 			$dataColumns = $gridFieldConfig->getComponentByType(GridFieldDataColumns::class);
 			
+			$PreSaleEndPercentage=DropdownField::create( 'PreSaleEndPercentage', 'Verkaufende nach Verkauf von (in Prozent)', singleton('Schrattenholz\Order\ProductList')->dbObject('PreSaleEndPercentage')->enumValues() ); 
+			$fields->addFieldToTab('Root.Produkte',$PreSaleEndPercentage,"PreSaleEnd");
 			//Wenn PreSales werden die Verkaufszahlen angezeigt
 			if($this->getOwner()->InPreSale){
 				$dataColumns->setDisplayFields([
