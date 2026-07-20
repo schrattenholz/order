@@ -2,7 +2,7 @@
 
 namespace Schrattenholz\Order;
 
-use Silverstripe\ORM\DataExtension;
+use SilverStripe\Core\Extension;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\NumericField;
@@ -28,12 +28,12 @@ use SilverStripe\Forms\GridField\GridField_ActionMenu;
 use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use SwiftDevLabs\DuplicateDataObject\Forms\GridField\GridFieldDuplicateAction;
-use Silverstripe\ORM\ArrayList;
+use SilverStripe\Model\List\ArrayList;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Security\Security;
 use SilverStripe\Core\Injector\Injector;
 use Psr\Log\LoggerInterface;
-use Silverstripe\Security\Group;
+use SilverStripe\Security\Group;
 use SilverStripe\ORM\ValidationException;
 use SilverStripe\ORM\Queries\SQLUpdate;
 use SilverStripe\Forms\ListboxField;
@@ -41,7 +41,7 @@ use UncleCheese\DisplayLogic;
 use UncleCheese\DisplayLogic\Forms\Wrapper;
 use Schrattenholz\Delivery\DeliverySetup;
 use SilverStripe\Forms\DropdownField;
-class Order_ProductListExtension extends DataExtension{
+class Order_ProductListExtension extends Extension{
 	private static $db=[
 		'ResetPreSale' => 'Boolean',
 		'InPreSale' => 'Boolean',

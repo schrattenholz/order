@@ -3,7 +3,7 @@
 
 namespace Schrattenholz\Order;
 
-use Silverstripe\ORM\DataObject;
+use SilverStripe\ORM\DataObject;
 use SilverStripe\Security\Permission;
 
 class Unit extends DataObject{

@@ -9,6 +9,7 @@ use SilverStripe\ORM\FieldType\DBForeignKey;
 
 
 use SilverStripe\ORM\FieldType\DBInt;
+use SilverStripe\Model\ModelData;
 use SilverStripe\Assets\File;
 use SilverStripe\Assets\Image;
 use SilverStripe\Core\Injector\Injector;
@@ -63,7 +64,7 @@ class DBForeignKey_Extension extends DBInt
         parent::__construct($name);
     }
 
-    public function scaffoldFormField($title = null, $params = null)
+    public function scaffoldFormField(?string $title = null, array $params = []): ?\SilverStripe\Forms\FormField
     {
         if (empty($this->object)) {
             return null;
@@ -131,11 +132,11 @@ class DBForeignKey_Extension extends DBInt
         return $field;
     }
 
-    public function setValue($value, $record = null, $markChanged = true)
+    public function setValue(mixed $value, null|array|ModelData $record = null, bool $markChanged = true): static
     {
         if ($record instanceof DataObject) {
             $this->object = $record;
         }
-        parent::setValue($value, $record, $markChanged);
+        return parent::setValue($value, $record, $markChanged);
     }
 }

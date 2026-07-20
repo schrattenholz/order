@@ -14,7 +14,7 @@ use SilverStripe\Forms\NumericField;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Forms\TabSet;
 use SilverStripe\Forms\DropdownField;
-use Silverstripe\ORM\DataObject;
+use SilverStripe\ORM\DataObject;
 use SilverStripe\Assets\Image;
 use SilverStripe\Forms\ListboxField;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
@@ -57,7 +57,7 @@ class Product extends Page
 		}
     }
 
-    public function getStatusFlags($cached = true) 
+    public function getStatusFlags(bool $cached = true): array
     {
         $flags = parent::getStatusFlags($cached);
 		 if($this->OutOfStock==true	){
@@ -103,10 +103,10 @@ class Product extends Page
 		if($this->Ingredients()->Count()>0){
 			$sumTitle.=", ".$this->Ingredients()->First()->Title;
 		}
-		return $sumTitle;//." mit ".$this->Wheels." Rädern";
+		return $sumTitle;//." mit ".$this->Wheels." Rï¿½dern";
 	}
 	public function onBeforeWrite(){
-		//Sortierunreiheienfolge wird gesetzt, wenn die übergeordnete Sortierung verändert wurde
+		//Sortierunreiheienfolge wird gesetzt, wenn die ï¿½bergeordnete Sortierung verï¿½ndert wurde
 		$newGlobalProductSort=($this->Parent()->GlobalProductSort*10000)+$this->Sort;
 		if($this->GlobalProductSort!=$newGlobalProductSort){
 			$this->GlobalProductSort=$newGlobalProductSort;
@@ -145,14 +145,14 @@ class Product extends Page
             );
 		$bild->setFolderName('Uploads/order/'.$this->URLSegment);
 		
-		$fields->addFieldToTab("Root.Main",new ListboxField("Addons", "Art der Bearbeitung",Addon::get()->map("ID", "Title", "Bitte auswählen")),"Content");
+		$fields->addFieldToTab("Root.Main",new ListboxField("Addons", "Art der Bearbeitung",Addon::get()->map("ID", "Title", "Bitte auswï¿½hlen")),"Content");
 		
 		$amount=new NumericField("Amount","Menge");
 		$amount->setLocale("DE_De");
 		$amount->setScale(2);
 		
 		$infiniteInventory=new CheckboxField("InfiniteInventory","Das Produkt hat einen unendlichen Bestand.");
-		$showQualitiyLabel=new CheckboxField("ShowQualityLabel",utf8_encode("Qualitäts-Label anzeigen"));
+		$showQualitiyLabel=new CheckboxField("ShowQualityLabel",utf8_encode("Qualitï¿½ts-Label anzeigen"));
 		$outOfStock=new CheckboxField("OutOfStock","Das Produkt als ausverkauft anzeigen.");
 		$inventory=new NumericField("Inventory","Vorhandene Anzahl");
 		$inventory->setLocale("DE_De");
@@ -161,14 +161,14 @@ class Product extends Page
 		$price=new NumericField("Price","Kilopreis");
 		$basePrice=new CheckboxField("ShowBasePrice","Grundpreis anzeigen");
 		$caprice=new CheckboxField("CaPrice","Preise sind ein Mittelwert (Ca. wird vor dem Preis angezeigt)");
-		$unit=new DropdownField("UnitID","Einheit",Unit::get()->map("ID", "Title", "Bitte auswählen"));
+		$unit=new DropdownField("UnitID","Einheit",Unit::get()->map("ID", "Title", "Bitte auswï¿½hlen"));
 
 		$price->setLocale("DE_De");
 		$price->setScale(2);
 		
 		$fields->addFieldToTab('Root.Main',new TextField("AdditionalTitle","Titel-Zusatz(z.B.: aus der Unterschale)"),"URLSegment");
 		
-		$fields->addFieldToTab("Root.Main",new ListboxField("Ingredients", "Zutaten",Ingredient::get()->map("ID", "Title", "Bitte auswählen")),"Content");
+		$fields->addFieldToTab("Root.Main",new ListboxField("Ingredients", "Zutaten",Ingredient::get()->map("ID", "Title", "Bitte auswï¿½hlen")),"Content");
 		//$fields->addFieldToTab("Root.Shop", $vac,"Content");
 		$fields->addFieldToTab("Root.Main", new TextField('GlobalProductSort'),"Content");
 		$fields->addFieldToTab("Root.Main", $showQualitiyLabel,"Content");

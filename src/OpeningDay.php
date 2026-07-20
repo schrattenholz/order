@@ -6,12 +6,12 @@
 namespace Schrattenholz\Order;
 
 use SilverStripe\ORM\DataObject;
-use SilverStripe\View\ArrayData;
-use Silverstripe\Forms\TextField;
-use Silverstripe\Forms\NumericField;
-use Silverstripe\Forms\CheckboxField;
-use Silverstripe\Forms\DropdownField;
-use Silverstripe\Forms\HiddenField;
+use SilverStripe\Model\ArrayData;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\NumericField;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\HiddenField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TabSet;
 use SilverStripe\Forms\DateField;
@@ -31,7 +31,7 @@ use SilverStripe\Forms\GridField\GridFieldFilterHeader;
 use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use Schrattenholz\OrderProfileFeature\OrderCustomerGroup;
-use Silverstripe\Forms\TimeField;
+use SilverStripe\Forms\TimeField;
 //Debugging
 use SilverStripe\Core\Injector\Injector;
 use Psr\Log\LoggerInterface;

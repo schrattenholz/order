@@ -2,8 +2,8 @@
 
 namespace Schrattenholz\Order;
 
-use Silverstripe\Assets\Image;
-use Silverstripe\ORM\DataObject;
+use SilverStripe\Assets\Image;
+use SilverStripe\ORM\DataObject;
 
 class ProductImage extends Image{
 	private static $table_name='ProductImage';

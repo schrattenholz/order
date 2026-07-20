@@ -7,7 +7,7 @@ use SilverStripe\Forms\GridField\GridFieldFilterHeader;
 use SilverStripe\Forms\DateField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\DropdownField;
-use Silverstripe\Forms\GridField\GridFieldPaginator;
+use SilverStripe\Forms\GridField\GridFieldPaginator;
 use SilverStripe\Core\Injector\Injector;
 use Psr\Log\LoggerInterface;
 
