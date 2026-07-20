@@ -19,7 +19,7 @@ use SilverStripe\Security\Permission;
 
 class Preis extends DataObject
 {
-	private static $default_sort=['SortOrder'];
+	private static $default_sort='SortOrder';
 	private static $table_name="Preis";
  	private static $singular_name="Produktvariante";
 	private static $plural_name="Produktvarianten";
