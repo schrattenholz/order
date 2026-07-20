@@ -19,14 +19,14 @@
 				<td style="border-top: 1px solid #dddddd;  line-height: 20px;  padding: 8px;  text-align: left;  vertical-align: top;">
 				<% if $PriceBlockElement %>
 					<div class="font-size-sm">
-					<span class="text-muted mr-2"><% loop $PriceBlockElement %>$FullTitle<% end_loop %</span>
+					<span class="text-muted mr-2"><% with $PriceBlockElement %>$FullTitle<% end_loop %</span>
 					</div>					
 				<% end_if %>
 				</td>
 				<td style="border-top: 1px solid #dddddd;  line-height: 20px;  padding: 8px;  text-align: left;  vertical-align: top;"><% if $PriceBlockElement.Portionable %>$formattedWeight($Quantity)<% else %>{$Quantity}stk<% end_if %></td>
 				
 			</tr>
-		  <% end_loop %>
+		  <% end_with %>
 
 		 </tbody>	 
         </table>

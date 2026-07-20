@@ -55,7 +55,7 @@ folgende Bestellung ist soeben eingegangen:
 				<td style="border-top: 1px solid #dddddd;  line-height: 20px;  padding: 8px;  text-align: left;  vertical-align: top;">
 				<% if $PriceBlockElement %>
 					<div class="font-size-sm">
-					<span class="text-muted mr-2"><% loop $PriceBlockElement %>$FullTitle<% end_loop %>
+					<span class="text-muted mr-2"><% with $PriceBlockElement %>$FullTitle<% end_with %>
 					</span>
 					</div>					
 				<% end_if %>

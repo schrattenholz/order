@@ -34,7 +34,7 @@
                 <h3 class="product-title font-size-base mb-2"><a href="$Product.Link?id=$ID&v=$PriceBlockElement.ID&vac=$Vacuum">$Product.SummaryTitle</a></h3>
                 <% if $PriceBlockElement %>
 					<div class="font-size-sm">
-					<span class="text-muted mr-2"><% loop $PriceBlockElement %>$FullTitle<% end_loop %></span>
+					<span class="text-muted mr-2"><% with $PriceBlockElement %>$FullTitle<% end_with %></span>
 					</div>
 					
 				<% end_if %>
