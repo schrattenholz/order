@@ -68,7 +68,7 @@ class Order_ProductListExtension extends Extension{
 			$preSaleEnd=DateField::create('PreSaleEnd','Ende des Vorverkauf');
 			$fields->addFieldToTab('Root.Produkte',$preSaleEnd);
 			
-			$attributesMap=Attribute::get()->map("ID", "Title", "Bitte auswählen");
+			$attributesMap=Attribute::get()->map("ID", "Title", "Bitte auswï¿½hlen");
 			$attributes=ListboxField::create('Attributes','Attribute',$attributesMap);
 			$fields->addFieldToTab('Root.Produkte', $attributes,'Content');
 					//Kilopreise pro Kundengruppe
@@ -91,7 +91,7 @@ class Order_ProductListExtension extends Extension{
 
 			//$fields->addFieldToTab('Root.Produkte',LiteralField::create("test","".);
 
-			$attributesMap=Attribute::get()->map("ID", "Title", "Bitte auswählen");
+			$attributesMap=Attribute::get()->map("ID", "Title", "Bitte auswï¿½hlen");
 			$editableColumns->setDisplayFields(array(
 				'AttributesIntern'  =>array(
 						'title'=>'Interne Attribute',
@@ -104,7 +104,7 @@ class Order_ProductListExtension extends Extension{
 							return NumericField::create($column)->setScale(2);
 					}),
 				'Inventory'  =>array(
-						'title'=>utf8_encode('Stückzahl'),
+						'title'=>utf8_encode('Stï¿½ckzahl'),
 						'callback'=>function($record, $column, $grid) {
 							return NumericField::create($column)->setScale(0);
 					}),
@@ -113,7 +113,7 @@ class Order_ProductListExtension extends Extension{
 						'field'=>ReadonlyField::class
 					),
 					'NotInPresale'  =>array(
-						'title'=>utf8_encode('Vom Vorverkauf ausschließen'),
+						'title'=>utf8_encode('Vom Vorverkauf ausschlieï¿½en'),
 						'callback'=>function($record, $column, $grid) {
 							$record->NotInPresale=0;
 							return CheckboxField::create($column);
@@ -171,12 +171,11 @@ class Order_ProductListExtension extends Extension{
 			$this->owner->setField("PreSaleEnd",null);
 			//Injector::inst()->get(LoggerInterface::class)->error('productlist preale auf null setzten=');
 		}
-		parent::onBeforeWrite();
 	}
 	public function onAfterWrite(){
 		
 		if($this->owner->ID==OrderConfig::get()->First()->ProductRootID  or $this->owner->Design=="Abverkaufliste"){
-		//Ausgewählte Produktvarianten holen
+		//Ausgewï¿½hlte Produktvarianten holen
 		//Injector::inst()->get(LoggerInterface::class)->error('onAfterWrite ProductList id');
 		if($this->owner->Attributes()->Count()>0){
 			$attributes=[];
@@ -201,7 +200,7 @@ class Order_ProductListExtension extends Extension{
 					$product->PreSaleStart=$this->owner->PreSaleStart;
 					$product->PreSaleEnd=$this->owner->PreSaleEnd;
 					if($product->Inventory==0 && $product->NotInPresale==false){
-						//Voreingestellten Bestand übernehmen
+						//Voreingestellten Bestand ï¿½bernehmen
 						$product->Inventory=$product->PreSaleInventory;
 						$product->PreSaleStartInventory=$product->PreSaleInventory;
 					}else if($product->NotInPresale==true){
@@ -231,7 +230,6 @@ class Order_ProductListExtension extends Extension{
 		}	
 		}
 		$this->owner->extend('HOOK_Order_ProductListExtension_AfterWrite', $this->owner);
-		parent::onAfterWrite();
 		$update = SQLUpdate::create('ProductList')->addWhere(['ID' => $this->owner->ID]);
 		$update->addAssignments(['InPreSale'=> false,'ResetPreSale'=> false]);
 		$update->execute();
