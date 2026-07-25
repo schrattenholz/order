@@ -104,7 +104,7 @@ class Order_ProductListExtension extends Extension{
 							return NumericField::create($column)->setScale(2);
 					}),
 				'Inventory'  =>array(
-						'title'=>utf8_encode('Stückzahl'),
+						'title'=>'Stückzahl',
 						'callback'=>function($record, $column, $grid) {
 							return NumericField::create($column)->setScale(0);
 					}),
@@ -113,7 +113,7 @@ class Order_ProductListExtension extends Extension{
 						'field'=>ReadonlyField::class
 					),
 					'NotInPresale'  =>array(
-						'title'=>utf8_encode('Vom Vorverkauf ausschließen'),
+						'title'=>'Vom Vorverkauf ausschließen',
 						'callback'=>function($record, $column, $grid) {
 							$record->NotInPresale=0;
 							return CheckboxField::create($column);

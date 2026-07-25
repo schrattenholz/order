@@ -214,7 +214,7 @@ class OrderExtension extends Extension {
 	public function getSingleProduct(){
 		foreach(explode('|||',$this->getWarenkorbData()) as $product){
 			$tmpAr=explode('+++',$product);
-			// Alle Produkte ausser dem zu löschenden Produkt werden im neuen Warenkorb gespeichert
+			// Alle Produkte ausser dem zu lÃ¶schenden Produkt werden im neuen Warenkorb gespeichert
 			$variantID=$this->getOwner()->Preise()->First()->ID;
 			if($tmpAr[0]==$this->getOwner()->ID && $tmpAr[2]==$variantID && $tmpAr[3]==$vac){
 				$aktProduct=$tmpAr;
@@ -231,7 +231,7 @@ class OrderExtension extends Extension {
 		foreach(explode('|||',$this->getWarenkorbData()) as $product){
 			$tmpAr=explode('+++',$product);
 			//return $vac." - ".$tmpAr[3];
-			// Alle Produkte ausser dem zu löschenden Produkt werden im neuen Warenkorb gespeichert
+			// Alle Produkte ausser dem zu lÃ¶schenden Produkt werden im neuen Warenkorb gespeichert
 			if($tmpAr[0]==$productID && $tmpAr[2]==$variant01 && $tmpAr[3]==$vac){
 				return $tmpAr[1];
 			}
@@ -248,7 +248,7 @@ class OrderExtension extends Extension {
 		foreach(explode('|||',$this->getWarenkorbData()) as $product){
 			$tmpAr=explode('+++',$product);		
 			$tmp.=$tmpAr[0]." - ".$tmpAr[2]." - ".$tmpAr[3]." | ";
-			// Alle Produkte ausser dem zu löschenden Produkt werden im neuen Warenkorb gespeichert
+			// Alle Produkte ausser dem zu lÃ¶schenden Produkt werden im neuen Warenkorb gespeichert
 			//return "|||".$id."-".$variant01."-".$vac."|||"."|||".$tmpAr[0]."-".$tmpAr[2]."-".$tmpAr[3]."|||";
 			if($tmpAr[0]==$id && $tmpAr[2]==$variant01 && $tmpAr[3]==$vac){
 			}else{
@@ -298,7 +298,7 @@ class OrderExtension extends Extension {
 		//Daten validieren
 		if($productData['quantity']!=0){
 			if($action=="new"){
-				// Prüfen, ob das Produkt bereits in der Session abgelegt ist
+				// PrÃ¼fen, ob das Produkt bereits in der Session abgelegt ist
 				//if($this->noDouble($productData['id'])){
 				if($this->noDouble($productData['id'],$productData['variant01'],$productData['vac'])){
 					$list=explode('|||',$this->getWarenkorbData());
@@ -332,7 +332,7 @@ class OrderExtension extends Extension {
 		}
 	}
 	
-	// Prüft ob das aktuelle Produkt bereits in der Session angelegt wurde
+	// PrÃ¼ft ob das aktuelle Produkt bereits in der Session angelegt wurde
 	function noDouble($productID,$variantID,$vac){	
 		foreach(explode('|||',$this->getWarenkorbData()) as $product){
 			$tmpAr=explode('+++',$product);
@@ -386,7 +386,7 @@ class OrderExtension extends Extension {
 		])
 		->setFrom(OrderConfig::get()->First()->ResponseEmail)
 		->setTo($this->getCheckoutAddress()->Email)
-		->setSubject(utf8_encode("Bestellbestätigung Hof Lehnmühle"));
+		->setSubject("BestellbestÃ¤tigung Hof LehnmÃ¼hle");
 		$email->send();
 			//$email = new Email("webseite@amp-bayern.com", "stein@amp-bayern.com", "Neue Tonnenreinigung-Bestellung", "");
 			/*

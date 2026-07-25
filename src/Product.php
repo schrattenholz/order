@@ -152,7 +152,7 @@ class Product extends Page
 		$amount->setScale(2);
 		
 		$infiniteInventory=new CheckboxField("InfiniteInventory","Das Produkt hat einen unendlichen Bestand.");
-		$showQualitiyLabel=new CheckboxField("ShowQualityLabel",utf8_encode("Qualit�ts-Label anzeigen"));
+		$showQualitiyLabel=new CheckboxField("ShowQualityLabel","Qualitäts-Label anzeigen");
 		$outOfStock=new CheckboxField("OutOfStock","Das Produkt als ausverkauft anzeigen.");
 		$inventory=new NumericField("Inventory","Vorhandene Anzahl");
 		$inventory->setLocale("DE_De");
