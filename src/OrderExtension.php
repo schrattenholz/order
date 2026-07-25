@@ -293,7 +293,7 @@ class OrderExtension extends Extension {
 	public function addToList($data){
 		$error=false;
 		$action=$data['action'];
-		$productData=json_decode(utf8_encode($data['orderedProduct']),true);
+		$productData=json_decode($data['orderedProduct'],true);
 
 		//Daten validieren
 		if($productData['quantity']!=0){
