@@ -20,7 +20,6 @@
 				</div>
 				 <% end_if %>
 				
-
 						<% if $Basket.ProductContainers %>
 							$RegistrationForm.Fields
 						<% else %>
@@ -74,6 +73,8 @@
 	
 <script>
 jQuery( document ).ready(function() {
+jQuery("#useraccounttab_Benutzerdaten").addClass("active show");
+jQuery("#tab-useraccounttab_Benutzerdaten").addClass("active");
 	var createUserAccountCK=jQuery("#OrderProfileFeature_RegistrationForm_useraccounttab_CreateUserAccount");
 	createUserAccountCK.on("change", function(){
 		if(jQuery(this).prop("checked")==true){
