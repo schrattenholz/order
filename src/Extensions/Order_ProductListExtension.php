@@ -104,7 +104,7 @@ class Order_ProductListExtension extends Extension{
 							return NumericField::create($column)->setScale(2);
 					}),
 				'Inventory'  =>array(
-						'title'=>utf8_encode('St�ckzahl'),
+						'title'=>utf8_encode('Stückzahl'),
 						'callback'=>function($record, $column, $grid) {
 							return NumericField::create($column)->setScale(0);
 					}),
@@ -113,7 +113,7 @@ class Order_ProductListExtension extends Extension{
 						'field'=>ReadonlyField::class
 					),
 					'NotInPresale'  =>array(
-						'title'=>utf8_encode('Vom Vorverkauf ausschlie�en'),
+						'title'=>utf8_encode('Vom Vorverkauf ausschließen'),
 						'callback'=>function($record, $column, $grid) {
 							$record->NotInPresale=0;
 							return CheckboxField::create($column);
@@ -197,6 +197,11 @@ class Order_ProductListExtension extends Extension{
 				Injector::inst()->get(LoggerInterface::class)->error('in PreSale setzen id'.$product->ID);
 				
 					$product->InPreSale=true;
+					// A presale item must have a defined stock -- infinite inventory doesn't make
+					// sense for something being sold this way, and left as-is it causes
+					// FreeQuantity()'s "Auf Lager" placeholder string to reach getSoldPercentage()'s
+					// division downstream (see OrderSale_PreisExtension::getSoldPercentage()).
+					$product->InfiniteInventory=false;
 					$product->PreSaleStart=$this->owner->PreSaleStart;
 					$product->PreSaleEnd=$this->owner->PreSaleEnd;
 					if($product->Inventory==0 && $product->NotInPresale==false){
