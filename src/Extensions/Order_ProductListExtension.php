@@ -2,6 +2,7 @@
 
 namespace Schrattenholz\Order;
 
+use SilverStripe\ORM\DataObject;
 use SilverStripe\Core\Extension;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\TextField;
@@ -164,6 +165,15 @@ class Order_ProductListExtension extends Extension{
 			}
 		}
 	}
+	/**
+	 * Merkt sich, ob der Vorverkauf mit *diesem* Speichern beginnt.
+	 *
+	 * onAfterWrite() laeuft bei jedem Speichern der Warengruppe, solange
+	 * InPreSale gesetzt ist. Den Bestand darf aber nur der Start neu setzen --
+	 * sonst wuerde jedes spaetere Speichern den Verkaufsstand ueberschreiben.
+	 */
+	private $preSaleJustStarted=false;
+
 	public function onBeforeWrite(){
 		if($this->owner->getField("ResetPreSale")==true){
 			$this->owner->setField("InPreSale",false);
@@ -171,6 +181,9 @@ class Order_ProductListExtension extends Extension{
 			$this->owner->setField("PreSaleEnd",null);
 			//Injector::inst()->get(LoggerInterface::class)->error('productlist preale auf null setzten=');
 		}
+		// Wechsel von "kein Vorverkauf" auf "Vorverkauf laeuft"
+		$this->preSaleJustStarted=(bool)$this->owner->getField("InPreSale")
+			&& $this->owner->isChanged("InPreSale",DataObject::CHANGE_VALUE);
 	}
 	public function onAfterWrite(){
 		
@@ -204,13 +217,18 @@ class Order_ProductListExtension extends Extension{
 					$product->InfiniteInventory=false;
 					$product->PreSaleStart=$this->owner->PreSaleStart;
 					$product->PreSaleEnd=$this->owner->PreSaleEnd;
-					if($product->Inventory==0 && $product->NotInPresale==false){
-						//Voreingestellten Bestand �bernehmen
-						$product->Inventory=$product->PreSaleInventory;
-						$product->PreSaleStartInventory=$product->PreSaleInventory;
-					}else if($product->NotInPresale==true){
+					if($product->NotInPresale==true){
+						// Von diesem Vorverkauf ausgenommen
 						$product->Inventory=0;
-					}else if($product->Inventory!=0 && $product->NotInPresale==false){
+					}else if($this->preSaleJustStarted){
+						// Zum Start gilt der voreingestellte Bestand: die Menge,
+						// die bei einem Tier ueblicherweise anfaellt. Sie ist
+						// zugleich Anfangsbestand und aktueller Bestand.
+						$product->PreSaleStartInventory=$product->PreSaleInventory;
+						$product->Inventory=$product->PreSaleInventory;
+					}else if($product->PreSaleStartInventory==0 && $product->Inventory!=0){
+						// Laeuft bereits, hat aber keinen Anfangsbestand --
+						// nachtragen, sonst fehlt jeder Auswertung die Bezugsgroesse.
 						$product->PreSaleStartInventory=$product->Inventory;
 					}
 					$this->owner->extend('HOOK_Order_ProductListExtension_AfterWrite_Product', $product);
