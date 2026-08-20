@@ -246,7 +246,18 @@ class Order_ProductListExtension extends Extension{
 			}
 		}else{
 			foreach($data as $product){
-						$product->PreSaleStartInventory=$product->Inventory;
+						// Nur ausserhalb eines Vorverkaufs ist der Anfangsbestand gleich
+						// dem Bestand. Laeuft einer, ist Inventory bereits um die
+						// verkauften Stueck verringert -- ihn hier zu uebernehmen wuerde
+						// den Bezugswert zerstoeren, an dem Fortschritt und Restmenge
+						// haengen.
+						//
+						// Gefragt wird die Variante, nicht die Warengruppe: deren
+						// InPreSale wird nach jedem Speichern per SQLUpdate
+						// zurueckgesetzt, ist also ein Ausloeser und kein Zustand.
+						if(!$product->InPreSale){
+							$product->PreSaleStartInventory=$product->Inventory;
+						}
 					
 					$this->owner->extend('HOOK_Order_ProductListExtension_AfterWrite_Product', $product);
 					$product->write(); // saves the record
