@@ -109,10 +109,6 @@ class Order_ProductListExtension extends Extension{
 						'callback'=>function($record, $column, $grid) {
 							return NumericField::create($column)->setScale(0);
 					}),
-				'SoldRatioInventory'  =>array(
-						'title' => 'Verkauft',
-						'field'=>ReadonlyField::class
-					),
 					'NotInPresale'  =>array(
 						'title'=>'Vom Vorverkauf ausschließen',
 						'callback'=>function($record, $column, $grid) {
